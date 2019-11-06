@@ -11,6 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/// Pages Controller Routes
+Route::get('/', 'PagesController@index');
+Route::get('/about','PagesController@about');
+
+
+/// Post Controller Routes
+Route::resource('posts','PostsController');
+Route::get('/blog','PostsController@index');
+
+/// Authentication  Routes
+Auth::routes();
+
+/// Dashboard Routes
+Route::get('/dashboard', 'DashboardController@index');
+Route::get('home','DashboardController@redirecter');
