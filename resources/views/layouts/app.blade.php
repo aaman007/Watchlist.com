@@ -23,7 +23,7 @@
     <div id="app">
         @include('inc.navbar')
         <main class="py-4">
-            <div class="container">
+            <div class="container" style="min-height:61vh;">
                 @include('inc.messages')
                 @yield('content')
                 <script>
@@ -38,9 +38,9 @@
         CKEDITOR.replace( 'article-ckeditor' );
     </script>
 
-    <br><br><br><br><br>
+    <br><br>
     <!-- Footer -->
-    <footer class="footer fixed-bottom p-2 text-center" style="background-color:#112358;color:white;">
+    <footer class="footer p-2 text-center" style="background-color:#112358;color:white;">
             Watchlist.com <br>
             Developed by : Amanur Rahman <br>
             ©2019 Copyrights
