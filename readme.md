@@ -7,14 +7,14 @@ Watchlist.com is designed for everyone who loves cinema and story-telling. It wi
 - User Friendly
 - Fast and Secured
 - Easy to use
-- Shout out your thoughts
+- Shout out your thoughts on shows
 
 Watchlist.com is accessible, powerful, and provides features required for all your cinema-needs
 
 ## Features
 - Authentication System
 - Blogging System
-- Covers Animes, TV Shows , Hollywood and Bollywood movies
+- Covers Animes, TV Shows, Hollywood and Bollywood movies
 - Profile System
-- Add shows to Plan to Watch, Completed , Dropped , On-Hold in your profile
+- Add shows to Plan to Watch, Completed, Dropped, On-Hold in your profile
 - View currently airing animes,tv shows and upcoming hollywood and bollywood movies
