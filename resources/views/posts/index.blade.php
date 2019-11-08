@@ -13,12 +13,13 @@
                         </div> -->
                         <div class="p-2">
                             <a style="text-decoration:none;" href="posts/{{$post->id}}"> <h5>{{$post->title}}</h5> </a>
-                            <small>Written on {{$post->created_at}} by <a href="users/{{$post->user->id}}/profile">{{$post->user->name}}</a></small>
+                            <small>Written on {{$post->created_at}} by <a href="users/{{$post->user->id}}">{{$post->user->name}}</a></small>
                         </div>
                     </div>
                 </div>
             </div>
         @endforeach
+        <br>
         {{$posts->links()}} <!-- Pagination -->
     @else
         <p>No Posts Found</p>
