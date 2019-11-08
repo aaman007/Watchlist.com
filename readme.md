@@ -1,4 +1,4 @@
-<p align="center"><img src="https://i.ibb.co/yPRpZsP/Watchlist2.png" width="15px" height="20px"></p>
+<p align="center"><img src="https://i.ibb.co/yPRpZsP/Watchlist2.png" width="100px" height="120px"></p>
 
 ## About Watchlist.com
 
