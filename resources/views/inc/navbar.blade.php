@@ -30,8 +30,8 @@
                             Top Rated
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/now-airing-anime">
-                            Now Airing
+                            <a class="dropdown-item" href="/currently-airing-anime">
+                            Currently Airing
                             </a>
                     </div>
                 </li>
@@ -50,8 +50,8 @@
                             Top Rated
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/now-airing-tv">
-                            Now Airing
+                            <a class="dropdown-item" href="/currently-airing-tv">
+                            Currently Airing
                             </a>
                     </div>
                 </li>

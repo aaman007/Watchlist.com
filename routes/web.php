@@ -31,11 +31,11 @@ Route::get('home','DashboardController@redirecter');
 Route::resource('shows','ShowsController');
 Route::get('most-watched-anime','ShowsController@mostWatchedAnime');
 Route::get('top-rated-anime','ShowsController@topRatedAnime');
-Route::get('now-airing-anime','ShowsController@nowAiringAnime');
+Route::get('currently-airing-anime','ShowsController@currentlyAiringAnime');
 
 Route::get('most-watched-tv','ShowsController@mostWatchedTV');
 Route::get('top-rated-tv','ShowsController@topRatedTV');
-Route::get('now-airing-tv','ShowsController@nowAiringTV');
+Route::get('currently-airing-tv','ShowsController@currentlyAiringTV');
 
 Route::get('most-watched-hollywood','ShowsController@mostWatchedHollywood');
 Route::get('top-rated-hollywood','ShowsController@topRatedHollywood');
@@ -46,3 +46,6 @@ Route::get('top-rated-bollywood','ShowsController@topRatedBollywood');
 /// Users Route
 Route::get('/users','UsersController@index');
 Route::get('/users/user-search','UsersController@search');
+Route::get('/profile','UsersController@myProfile');
+Route::get('/update-details','UsersController@updateDetails');
+Route::get('/users/{id}','UsersController@userProfile');

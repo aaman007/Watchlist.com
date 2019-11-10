@@ -12,6 +12,18 @@ class UsersController extends Controller
         $users = User::orderBy('name','asc')->paginate(10);
         return view('users.index')->with('users',$users);
     }
+    public function myProfile()
+    {
+
+    }
+    public function userProfile($id)
+    {
+
+    }
+    public function updateDetails()
+    {
+        
+    }
     public function search()
     {
         $search = $_GET['search'];

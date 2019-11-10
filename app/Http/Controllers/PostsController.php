@@ -117,7 +117,7 @@ class PostsController extends Controller
         $post = Post::find($id);
 
         // Checking for unauthorized user
-        if(auth()->user()->id != $post->user_id && !auth()->user()->admin){
+        if(auth()->user()->id != $post->user_id){
             return redirect('/posts')->with('error','Unauthorized Page');
         }
 

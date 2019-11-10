@@ -31,10 +31,10 @@ class ShowsController extends Controller
         );
         return view('shows.shows_list')->with($data);
     }
-    public function nowAiringAnime()
+    public function currentlyAiringAnime()
     {
         $data = array(
-            'header' => 'Now Airing Animes'
+            'header' => 'Currently Airing Animes'
         );
         return view('shows.shows_list')->with($data);
     }
@@ -53,10 +53,10 @@ class ShowsController extends Controller
         );
         return view('shows.shows_list')->with($data);
     }
-    public function nowAiringTV()
+    public function currentlyAiringTV()
     {
         $data = array(
-            'header' => 'Now Airing TV Shows'
+            'header' => 'Currently Airing TV Shows'
         );
         return view('shows.shows_list')->with($data);
     }

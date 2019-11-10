@@ -9,7 +9,7 @@ Watchlist.com is designed for everyone who loves cinema and story-telling. It wi
 - Easy to use
 - Shout out your thoughts on shows
 
-Watchlist.com is accessible, powerful, and provides features required for all your cinema-needs
+Watchlist.com is accessible, powerful, and provides features required for all your cinema-needs.
 
 ## Features
 - Authentication System
@@ -18,3 +18,5 @@ Watchlist.com is accessible, powerful, and provides features required for all yo
 - Profile System
 - Add shows to Plan to Watch, Completed, Dropped, On-Hold in your profile
 - View currently airing animes,tv shows and upcoming hollywood and bollywood movies
+- User Rating System on shows
+- Top Rated Shows list and Most Watched Shows list
