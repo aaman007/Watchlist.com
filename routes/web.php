@@ -49,3 +49,6 @@ Route::get('/users/user-search','UsersController@search');
 Route::get('/profile','UsersController@myProfile');
 Route::get('/update-details','UsersController@updateDetails');
 Route::get('/users/{id}','UsersController@userProfile');
+
+// Admin Controller Routes
+Route::get('/admin-panel','AdminsController@index');
