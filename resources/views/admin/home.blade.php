@@ -36,13 +36,13 @@
             <!-- small box -->
             <div class="small-box bg-green">
               <div class="inner">
-                <h3>{{$announcements}}<sup style="font-size: 20px"></sup></h3>
-                <p>Announcements</p>
+                <h3>{{$shows}}<sup style="font-size: 20px"></sup></h3>
+                <p>Shows</p>
                 <div class="icon">
-                  <i class="fa fa-bullhorn"></i>
+                  <i class="fa fa-television"></i>
                 </div>
               </div>
-              <a href="/admin-panel/announcements" class="small-box-footer">See All <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="/admin-panel/shows" class="small-box-footer">See All <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

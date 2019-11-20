@@ -90,7 +90,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/storage/profile_pictures/{{Auth::user()->profile_picture}}" class="img-circle" alt="User Image">
+          <img src="/storage/cover_images/psycho.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{Auth::user()->name}}</p>
@@ -110,14 +110,14 @@
         <li class="treeview">
             <a href="/announcements">
               <i class="fa fa-edit"></i>
-              <span>Announcements</span>
+              <span>Shows</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="/admin-panel/announcements"><i class="fa fa-circle-o"></i> All</a></li>
-              <li><a href="/admin-panel/create-announcement"><i class="fa fa-circle-o"></i> Create</a></li>
+              <li><a href="/admin-panel/shows"><i class="fa fa-circle-o"></i> All Shows</a></li>
+              <li><a href="/admin-panel/new-show"><i class="fa fa-circle-o"></i> Add New Show</a></li>
             </ul>
           </li>
         <li>

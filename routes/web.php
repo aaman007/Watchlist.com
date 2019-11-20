@@ -52,3 +52,4 @@ Route::get('/users/{id}','UsersController@userProfile');
 
 // Admin Controller Routes
 Route::get('/admin-panel','AdminsController@index');
+Route::get('/admin-panel/logs','AdminsController@logs');
