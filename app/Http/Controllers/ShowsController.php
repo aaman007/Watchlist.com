@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+
+use App\Show;
+use App\User;
+use App\Log;
 
 class ShowsController extends Controller
 {
@@ -98,7 +101,7 @@ class ShowsController extends Controller
      */
     public function create()
     {
-        //
+        return view('shows.create');
     }
 
     /**
@@ -109,7 +112,49 @@ class ShowsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->file('cover_image'));
+        $this->validate($request,[
+            'name' => 'required|max:140',
+            'plot' => 'required',
+            'cover_image' => 'required|image|max:1999',
+            'episodes' => 'required|numeric',
+            'premiere_date' => 'required|date',
+            'status' => 'required',
+            'category' => 'required'
+
+        ]);
+        // Handle file upload
+        
+        // Get filename with extention
+        $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+        // Get filename
+        $filename = pathinfo($filenameWithExt,PATHINFO_FILENAME);
+        // Get Extension
+        $extension = $request->file('cover_image')->getClientOriginalExtension();
+        $filenameToStore = $filename . "_" . time() . "." . $extension;
+        // Upload Image
+        $path = $request->file('cover_image')->storeAs('public/cover_images',$filenameToStore);
+
+        // Storing data in database
+        $show = new Show;
+        $show->name = $request->input('name');
+        $show->cover_image = $filenameToStore;
+        $show->plot = $request->input('plot');
+        $show->episodes = $request->input('episodes');
+        $show->premiere_date = $request->input('premiere_date');
+        $show->status = $request->input('status');
+        $show->category = $request->input('category');
+        $show->user_id = Auth::user()->id;
+        $show->watch_count = $show->rating_count = 0;
+        $show->rating = 0.00;
+        $show->save();
+
+        // Adding Logs
+        $log = new Log;
+        $log->details = Auth::user()->name . " added a show named " . $show->name;
+        $log->save();
+
+        return redirect('/admin-panel/shows')->with('success','Show Added');
     }
 
     /**

@@ -29,6 +29,9 @@ Route::get('home','DashboardController@redirecter');
 
 /// Shows Routes
 Route::resource('shows','ShowsController');
+Route::get('admin-panel/add-new-show','ShowsController@create');
+Route::get('admin-panel/shows/store','ShowsController@store');
+
 Route::get('most-watched-anime','ShowsController@mostWatchedAnime');
 Route::get('top-rated-anime','ShowsController@topRatedAnime');
 Route::get('currently-airing-anime','ShowsController@currentlyAiringAnime');
@@ -53,3 +56,7 @@ Route::get('/users/{id}','UsersController@userProfile');
 // Admin Controller Routes
 Route::get('/admin-panel','AdminsController@index');
 Route::get('/admin-panel/logs','AdminsController@logs');
+Route::get('admin-panel/posts','AdminsController@showPosts');
+Route::get('admin-panel/users','AdminsController@showUsers');
+Route::get('admin-panel/admins','AdminsController@showAdmins');
+Route::get('admin-panel/shows','AdminsController@showShows');

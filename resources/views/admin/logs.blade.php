@@ -11,24 +11,29 @@
         <li><a href="/admin-panel"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Logs</li>
         </ol>
+        <br>
     </section>
 
     <section class="content">
         @if(count($logs))
-            <table class="table table-striped text-center">
-                <tr>
-                    <th>#ID</th>
-                    <th>Details</th>
-                    <th>Time</th>
-                </tr>
-            @foreach($logs as $log)
-                <tr>
-                <td>{{$log->id}}</td>
-                <td>{{$log->details}}</td>
-                <td>{{$log->created_at}}</td>
-                </tr>
-            @endforeach
-            </table>
+            <div class="well">
+                <div class="well-body">
+                    <table class="table table-striped text-center">
+                        <tr>
+                            <th>#ID</th>
+                            <th>Details</th>
+                            <th>Time</th>
+                        </tr>
+                    @foreach($logs as $log)
+                        <tr>
+                        <td>{{$log->id}}</td>
+                        <td>{{$log->details}}</td>
+                        <td>{{$log->created_at}}</td>
+                        </tr>
+                    @endforeach
+                    </table>
+                </div>
+            </div>
             <div class="justify-content-center">
                     {{$logs->links()}} <!-- Pagination -->
             </div>

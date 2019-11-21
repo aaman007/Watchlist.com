@@ -117,7 +117,7 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="/admin-panel/shows"><i class="fa fa-circle-o"></i> All Shows</a></li>
-              <li><a href="/admin-panel/new-show"><i class="fa fa-circle-o"></i> Add New Show</a></li>
+              <li><a href="/admin-panel/add-new-show"><i class="fa fa-circle-o"></i> Add New Show</a></li>
             </ul>
           </li>
         <li>

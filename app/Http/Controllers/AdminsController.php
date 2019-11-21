@@ -31,4 +31,20 @@ class AdminsController extends Controller
         $logs = Log::orderBy('created_at','desc')->paginate(15);
         return view('admin.logs')->with('logs',$logs);
     }
+    public function showPosts()
+    {
+        return view('admin.posts_list');
+    }
+    public function showAdmins()
+    {
+        return view('admin.admins_list');
+    }
+    public function showUsers()
+    {
+        return view('admin.users_list');
+    }
+    public function showShows()
+    {
+        return view('admin.shows_list');
+    }
 }

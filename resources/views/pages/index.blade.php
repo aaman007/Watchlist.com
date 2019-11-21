@@ -8,7 +8,7 @@
             @if(count($animes))
                 <div class="card-deck">
                     @foreach ($animes as $anime)
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 mb-4">
                         <div class="card h-100">
                             <img class="card-img-top" src="/storage/cover_images/{{$anime->cover_image}}" alt="{{$anime->name}}">
                             <div class="card-body">
@@ -32,7 +32,7 @@
                 @if(count($tvs) > 3)
                 <div class="card-deck">
                         @foreach ($tvs as $tv)
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 mb-4">
                         <div class="card h-100">
                                 <img class="card-img-top" src="/storage/cover_images/{{$tv->cover_image}}" alt="{{$tv->name}}">
                                 <div class="card-body">
@@ -56,7 +56,7 @@
                 @if(count($hollywoods))
                 <div class="card-deck">
                         @foreach ($hollywoods as $hollywood)
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 mb-4">
                         <div class="card">
                                 <img class="card-img-top" src="/storage/cover_images/{{$hollywood->cover_image}}" alt="{{$hollywood->name}}">
                                 <div class="card-body">
@@ -80,7 +80,7 @@
                 @if(count($bollywoods))
                 <div class="card-deck">
                         @foreach ($bollywoods as $bollywood)
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 mb-4">
                         <div class="card">
                                 <img class="card-img-top" src="/storage/cover_images/{{$bollywood->cover_image}}" alt="{{$bollywood->name}}">
                                 <div class="card-body">
