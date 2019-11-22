@@ -15,7 +15,7 @@
     </section>
     <section class="content">
         <div class="well" style="font-family:arial;">
-            <form action="/admin-panel/shows/store" ethod="post" enctype="multipart/form-data">
+            <form action="{{route('shows.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <table class="table table-striped">
                 <tr>

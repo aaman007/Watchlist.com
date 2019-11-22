@@ -9,10 +9,10 @@ class PagesController extends Controller
 {
     public function index()
     {
-        $animes = Show::where('status','Airing')->where('category','Anime')->orderBy('rating','desc')->take(12)->get();
-        $tvs = Show::where('status','Airing')->where('category','TV')->orderBy('rating','desc')->take(12)->get();
-        $hollywoods = Show::where('status','Not Aired')->where('category','Hollywood')->orderBy('premiere_date','asc')->take(12)->get();
-        $bollywoods = Show::where('status','Not Aired')->where('category','Bollywood')->orderBy('premiere_date','asc')->take(12)->get();
+        $animes = Show::where('status','Airing')->where('category','Anime')->orderBy('rating','desc')->take(8)->get();
+        $tvs = Show::where('status','Airing')->where('category','TV')->orderBy('rating','desc')->take(8)->get();
+        $hollywoods = Show::where('status','Not Aired')->where('category','Hollywood')->orderBy('premiere_date','asc')->take(8)->get();
+        $bollywoods = Show::where('status','Not Aired')->where('category','Bollywood')->orderBy('premiere_date','asc')->take(8)->get();
         $data = array(
             'animes' => $animes,
             'tvs' => $tvs,

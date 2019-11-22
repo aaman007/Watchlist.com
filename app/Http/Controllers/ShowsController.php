@@ -22,74 +22,94 @@ class ShowsController extends Controller
     // Anime
     public function mostWatchedAnime()
     {
+        $shows = Show::where('category','Anime')->orderBy('watch_count','desc')->paginate(5);
         $data = array(
-            'header' => 'Most Watched Animes'
+            'header' => 'Most Watched Animes',
+            'shows' => $shows
         );
         return view('shows.shows_list')->with($data);
     }
     public function topRatedAnime()
     {
+        $shows = Show::where('category','Anime')->orderBy('rating','desc')->paginate(5);
         $data = array(
-            'header' => 'Top Rated Animes'
+            'header' => 'Top Rated Animes',
+            'shows' => $shows
         );
         return view('shows.shows_list')->with($data);
     }
     public function currentlyAiringAnime()
     {
+        $shows = Show::where('category','Anime')->where('status','Airing')->orderBy('name','asc')->paginate(5);
         $data = array(
-            'header' => 'Currently Airing Animes'
+            'header' => 'Currently Airing Animes',
+            'shows' => $shows
         );
         return view('shows.shows_list')->with($data);
     }
     // TV Shows
     public function mostWatchedTV()
     {
+        $shows = Show::where('category','TV')->orderBy('watch_count','desc')->paginate(5);
         $data = array(
-            'header' => 'Most Watched TV Shows'
+            'header' => 'Most Watched TV Shows',
+            'shows' => $shows
         );
         return view('shows.shows_list')->with($data);
     }
     public function topRatedTV()
     {
+        $shows = Show::where('category','TV')->orderBy('rating','desc')->paginate(5);
         $data = array(
-            'header' => 'Top Rated TV Shows'
+            'header' => 'Top Rated TV Shows',
+            'shows' => $shows
         );
         return view('shows.shows_list')->with($data);
     }
     public function currentlyAiringTV()
     {
+        $shows = Show::where('category','TV')->where('status','Airing')->orderBy('name','asc')->paginate(5);
         $data = array(
-            'header' => 'Currently Airing TV Shows'
+            'header' => 'Currently Airing TV Shows',
+            'shows' => $shows
         );
         return view('shows.shows_list')->with($data);
     }
     // Hollywood Movies
     public function mostWatchedHollywood()
     {
+        $shows = Show::where('category','Hollywood')->orderBy('watch_count','desc')->paginate(5);
         $data = array(
-            'header' => 'Most Watched Hollywood Movies'
+            'header' => 'Most Watched Hollywood Movies',
+            'shows' => $shows
         );
         return view('shows.shows_list')->with($data);
     }
     public function topRatedHollywood()
     {
+        $shows = Show::where('category','Hollywood')->orderBy('rating','desc')->paginate(5);
         $data = array(
-            'header' => 'Top Rated Hollywood Movies'
+            'header' => 'Top Rated Hollywood Movies',
+            'shows' => $shows
         );
         return view('shows.shows_list')->with($data);
     }
     // Bollywood Movies
     public function mostWatchedBollywood()
     {
+        $shows = Show::where('category','Bollywood')->orderBy('watch_count','desc')->paginate(5);
         $data = array(
-            'header' => 'Most Watched Bollywood Movies'
+            'header' => 'Most Watched Bollywood Movies',
+            'shows' => $shows
         );
         return view('shows.shows_list')->with($data);
     }
     public function topRatedBollywood()
     {
+        $shows = Show::where('category','Bollywood')->orderBy('rating','desc')->paginate(5);
         $data = array(
-            'header' => 'Top Rated Bollywood Movies'
+            'header' => 'Top Rated Bollywood Movies',
+            'shows' => $shows
         );
         return view('shows.shows_list')->with($data);
     }
@@ -112,7 +132,6 @@ class ShowsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->file('cover_image'));
         $this->validate($request,[
             'name' => 'required|max:140',
             'plot' => 'required',
@@ -144,14 +163,14 @@ class ShowsController extends Controller
         $show->premiere_date = $request->input('premiere_date');
         $show->status = $request->input('status');
         $show->category = $request->input('category');
-        $show->user_id = Auth::user()->id;
+        $show->user_id = auth()->user()->id;
         $show->watch_count = $show->rating_count = 0;
         $show->rating = 0.00;
         $show->save();
 
         // Adding Logs
         $log = new Log;
-        $log->details = Auth::user()->name . " added a show named " . $show->name;
+        $log->details = auth()->user()->name . " added a show named " . $show->name;
         $log->save();
 
         return redirect('/admin-panel/shows')->with('success','Show Added');
@@ -165,7 +184,22 @@ class ShowsController extends Controller
      */
     public function show($id)
     {
-        //
+        $show = Show::find($id);
+        $popularity = Show::where('watch_count','>',$show->watch_count)->count() + 1;
+        $ranked = Show::where('rating','>',$show->rating)->count() + 1;
+        $status = "Add to list";
+        $rateIt = "Rate It";
+        $watchedEpisodes = 0;
+
+        $data = array(
+            'popularity' => $popularity,
+            'ranked' => $ranked,
+            'show' => $show,
+            'status' => $status,
+            'rateIt' => $rateIt,
+            'watchedEpisodes' => $watchedEpisodes
+        );
+        return view('shows.show')->with($data);
     }
 
     /**

@@ -60,3 +60,7 @@ Route::get('admin-panel/posts','AdminsController@showPosts');
 Route::get('admin-panel/users','AdminsController@showUsers');
 Route::get('admin-panel/admins','AdminsController@showAdmins');
 Route::get('admin-panel/shows','AdminsController@showShows');
+
+
+// Staistics Controller Routes
+Route::resource('statistics','StatisticsController');

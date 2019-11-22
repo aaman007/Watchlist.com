@@ -128,6 +128,11 @@
                             <a class="dropdown-item" href="/update-details">
                                 Update Details
                             </a>
+                            @if(Auth::user()->id == 1)
+                                <a class="dropdown-item" href="/admin-panel">
+                                    Admin Panel
+                                </a>
+                            @endif
 
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();

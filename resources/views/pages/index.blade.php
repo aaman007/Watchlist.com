@@ -57,7 +57,7 @@
                 <div class="card-deck">
                         @foreach ($hollywoods as $hollywood)
                         <div class="col-sm-3 mb-4">
-                        <div class="card">
+                        <div class="card h-100">
                                 <img class="card-img-top" src="/storage/cover_images/{{$hollywood->cover_image}}" alt="{{$hollywood->name}}">
                                 <div class="card-body">
                                 <p class="card-text text-center"> <strong>{{$hollywood->name}}</strong></p>
@@ -81,12 +81,12 @@
                 <div class="card-deck">
                         @foreach ($bollywoods as $bollywood)
                         <div class="col-sm-3 mb-4">
-                        <div class="card">
+                        <div class="card h-100">
                                 <img class="card-img-top" src="/storage/cover_images/{{$bollywood->cover_image}}" alt="{{$bollywood->name}}">
                                 <div class="card-body">
                                 <p class="card-text text-center"> <strong>{{$bollywood->name}}</strong></p>
                                 </div>
-                                <a class="card-footer btn btn-primary bg-primary" href="/shows/{{$hollywood->id}}"> Explore </a>
+                                <a class="card-footer btn btn-primary bg-primary" href="/shows/{{$bollywood->id}}"> Explore </a>
                         </div>
                         </div>
                         @endforeach
