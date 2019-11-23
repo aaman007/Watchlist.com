@@ -90,7 +90,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/storage/cover_images/psycho.jpg" class="img-circle" alt="User Image">
+          <img src="/storage/profile_pictures/{{Auth::user()->profile_picture}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{Auth::user()->name}}</p>

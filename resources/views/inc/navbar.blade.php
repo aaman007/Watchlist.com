@@ -128,7 +128,7 @@
                             <a class="dropdown-item" href="/update-details">
                                 Update Details
                             </a>
-                            @if(Auth::user()->id == 1)
+                            @if(Auth::user()->role == "Admin")
                                 <a class="dropdown-item" href="/admin-panel">
                                     Admin Panel
                                 </a>

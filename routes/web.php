@@ -47,11 +47,9 @@ Route::get('most-watched-bollywood','ShowsController@mostWatchedBollywood');
 Route::get('top-rated-bollywood','ShowsController@topRatedBollywood');
 
 /// Users Route
-Route::get('/users','UsersController@index');
 Route::get('/users/user-search','UsersController@search');
-Route::get('/profile','UsersController@myProfile');
-Route::get('/update-details','UsersController@updateDetails');
-Route::get('/users/{id}','UsersController@userProfile');
+Route::resource('users','UsersController');
+Route::get('/update-details','UsersController@update_details');
 
 // Admin Controller Routes
 Route::get('/admin-panel','AdminsController@index');

@@ -16,12 +16,20 @@
             <div class="card-body">
                 <h5> <a href="users/{{$user->id}}"> {{$user->name}} </a>
 
-                <span class='badge badge-secondary'>Member</span>
+                @if($user->rank == 1)
+                    <span class='badge badge-primary p-2'>{{$user->title}}</span>
+                @elseif($user->rank == 2)
+                    <span class='badge badge-success p-2'>{{$user->title}}</span>
+                @elseif($user->rank == 3)
+                    <span class='badge badge-dark p-2'>{{$user->title}}</span>
+                @else
+                    <span class='badge badge-secondary p-2'>{{$user->title}}</span>
+                @endif
 
                 <?php $diff = Carbon\Carbon::parse($user->created_at)->diffInDays(Carbon\Carbon::now()) ?>
 
                 @if($diff <= 1)
-                    <span class='badge badge-dark'>New</span>
+                    <span class='badge badge-dark p-2'>New</span>
                 @endif
                 </h5>
             </div>

@@ -16,7 +16,7 @@ class AdminsController extends Controller
         $users = User::all()->count();
         $shows = Show::all()->count();
         $posts = Post::all()->count();
-        $admins = 1;
+        $admins = User::where('role','Admin')->count();
 
         $data = array(
             'posts' => $posts,

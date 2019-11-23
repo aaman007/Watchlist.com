@@ -191,6 +191,11 @@ class ShowsController extends Controller
         $rateIt = "Rate It";
         $watchedEpisodes = 0;
 
+        if(!auth()->guest())
+        {
+            
+        }
+
         $data = array(
             'popularity' => $popularity,
             'ranked' => $ranked,
