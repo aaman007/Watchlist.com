@@ -29,7 +29,7 @@
     <div class="card">
         <div class="card-header"> Currently Airing TV Shows </div>
         <div class="card-body">
-                @if(count($tvs) > 3)
+                @if(count($tvs))
                 <div class="card-deck">
                         @foreach ($tvs as $tv)
                         <div class="col-sm-3 mb-4">

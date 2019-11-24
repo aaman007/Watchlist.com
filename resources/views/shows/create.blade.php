@@ -63,9 +63,9 @@
                     <th>
                     <div class="form-group">
                         <select class="form-control" name="status">
-                            <option>Airing</option>
-                            <option>Not Aired</option>
-                            <option>Finished</option>
+                            <option value="Airing">Airing</option>
+                            <option value="Not Aired">Not Aired</option>
+                            <option value="Finished">Finished</option>
                         </select>
                     </div>
                     </th>
@@ -75,10 +75,10 @@
                     <th>
                     <div class="form-group">
                         <select class="form-control" name="category">
-                            <option>Anime</option>
-                            <option>TV</option>
-                            <option>Hollywood</option>
-                            <option>Bollywood</option>
+                            <option value="Anime">Anime</option>
+                            <option value="TV">TV</option>
+                            <option value="Hollywood">Hollywood</option>
+                            <option value="Bollywood">Bollywood</option>
                         </select>
                     </div>
                     </th>

@@ -65,19 +65,19 @@
                     <div class="form-group">
                         <select class="form-control" name="status">
                             @if($show->status == 'Airing')
-                                <option selected>Airing</option>
+                                <option value="Airing" selected>Airing</option>
                             @else
-                                <option>Airing</option>
+                                <option value="Airing">Airing</option>
                             @endif
                             @if($show->status == "Not Aired")
-                                <option selected>Not Aired</option>
+                                <option selected value="Not Aired">Not Aired</option>
                             @else
-                                <option>Not Aired</option>
+                                <option value="Not Aired">Not Aired</option>
                             @endif
                             @if($show->status == "Finished")
-                                <option selected>Finished</option>
+                                <option selected value="Finished">Finished</option>
                             @else
-                                <option>Finished</option>
+                                <option value="Finished">Finished</option>
                             @endif
                         </select>
                     </div>
@@ -89,24 +89,24 @@
                     <div class="form-group">
                         <select class="form-control" name="category">
                             @if($show->category == 'Anime')
-                                <option selected>Anime</option>
+                                <option selected value="Anime">Anime</option>
                             @else
-                                <option>Anime</option>
+                                <option value="Anime">Anime</option>
                             @endif
                             @if($show->category == "TV")
-                                <option selected>TV</option>
+                                <option selected value="TV">TV</option>
                             @else
-                                <option>TV</option>
+                                <option value="TV">TV</option>
                             @endif
                             @if($show->category == "Hollywood")
-                                <option selected>Hollywood</option>
+                                <option selected value="Hollywood">Hollywood</option>
                             @else
-                                <option>Hollywood</option>
+                                <option value="Hollywood">Hollywood</option>
                             @endif
                             @if($show->category == "Bollywood")
-                            <option selected>Bollywood</option>
+                                <option selected value="Bollywood">Bollywood</option>
                             @else 
-                                <option>Bollywood</option>
+                                <option value="Bollywood">Bollywood</option>
                             @endif
                         </select>
                     </div>
