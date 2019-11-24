@@ -30,7 +30,8 @@ Route::get('home','DashboardController@redirecter');
 /// Shows Routes
 Route::resource('shows','ShowsController');
 Route::get('admin-panel/add-new-show','ShowsController@create');
-Route::get('admin-panel/shows/store','ShowsController@store');
+Route::get('admin-panel/shows/edit/{id}','ShowsController@edit');
+Route::get('/admin-panel/shows/delete/{id}','ShowsController@destroy');
 
 Route::get('most-watched-anime','ShowsController@mostWatchedAnime');
 Route::get('top-rated-anime','ShowsController@topRatedAnime');
@@ -56,9 +57,18 @@ Route::get('/admin-panel','AdminsController@index');
 Route::get('/admin-panel/logs','AdminsController@logs');
 Route::get('admin-panel/posts','AdminsController@showPosts');
 Route::get('admin-panel/users','AdminsController@showUsers');
+Route::get('admin-panel/users/promote/{id}','AdminsController@promote');
+Route::get('admin-panel/users/demote/{id}','AdminsController@demote');
 Route::get('admin-panel/admins','AdminsController@showAdmins');
 Route::get('admin-panel/shows','AdminsController@showShows');
 
 
+
 // Staistics Controller Routes
 Route::resource('statistics','StatisticsController');
+
+// AdminPanel Posts Controller Routes
+Route::get('/admin-panel/posts/delete/{id}','AdminPostsController@destroy');
+Route::get('/admin-panel/posts/edit/{id}','AdminPostsController@edit');
+Route::get('/admin-panel/posts/{id}','AdminPostsController@show');
+Route::put('/admin-panel/posts/update/{id}','AdminPostsController@update')->name('admin.posts.update');

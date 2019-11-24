@@ -108,18 +108,39 @@
           </a>
         </li>
         <li class="treeview">
-            <a href="/announcements">
-              <i class="fa fa-edit"></i>
-              <span>Shows</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="/admin-panel/shows"><i class="fa fa-circle-o"></i> All Shows</a></li>
-              <li><a href="/admin-panel/add-new-show"><i class="fa fa-circle-o"></i> Add New Show</a></li>
-            </ul>
-          </li>
+          <a href="/shows">
+            <i class="fa fa-tv"></i>
+            <span>Shows</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/admin-panel/shows"><i class="fa fa-circle-o"></i> All Shows</a></li>
+            <li><a href="/admin-panel/add-new-show"><i class="fa fa-circle-o"></i> Add New Show</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/admin-panel/posts">
+            <i class="fa fa-edit"></i> <span>Posts</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+      </li>
+      <li>
+          <a href="/admin-panel/users">
+            <i class="fa fa-user-circle"></i> <span>Users</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+      </li>
+      <li>
+          <a href="/admin-panel/admins">
+            <i class="fa fa-user-secret"></i> <span>Admins</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+      </li>
         <li>
             <a href="/admin-panel/logs">
               <i class="fa fa-th"></i> <span>Logs</span>

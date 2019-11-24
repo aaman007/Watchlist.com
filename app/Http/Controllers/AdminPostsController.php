@@ -4,17 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Exception;
 use App\Post;
 use App\Log;
-use DB;
 
-class PostsController extends Controller
+class AdminPostsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth' , ['except' => ['index','show']]);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -22,14 +16,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //$posts =  Post::all();
-        //$posts = DB::select('SELECT *FROM posts');
-        //return Post::where('title','Post Two')->get();
-        //$posts = Post::orderBy('created_at','desc')->take(1)->get();
-        //$posts = Post::orderBy('created_at','desc')->get();
-
-        $posts = Post::orderBy('created_at','desc')->paginate(7);
-        return view('posts.index')->with('posts',$posts);
+        $posts = Post::orderBy('created_at','desc')->paginate(15);
+        return view('admin.posts_list')->with('posts',$posts);
     }
 
     /**
@@ -39,7 +27,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        //
     }
 
     /**
@@ -50,47 +38,7 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'title' => 'required|max:140',
-            'body' => 'required' ,
-            'cover_image' => 'image|nullable|max:1999'
-        ]);
-
-        // Handle file upload
-        if($request->hasFile('cover_image')){
-
-            // Get filename with extention
-            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
-
-            // Get filename
-            $filename = pathinfo($filenameWithExt,PATHINFO_FILENAME);
-
-            // Get Extension
-            $extension = $request->file('cover_image')->getClientOriginalExtension();
-
-            $filenameToStore = $filename . "_" . time() . "." . $extension;
-
-            // Upload Image
-            $path = $request->file('cover_image')->storeAs('public/cover_images',$filenameToStore);
-        }
-        else{
-            $filenameToStore = "noname.jpg";
-        }
-
-        // Create Post
-        $post = new Post;
-        $post->title = $request->input('title');
-        $post->body = $request->input('body');
-        $post->user_id = auth()->user()->id;
-        $post->cover_image = $filenameToStore;
-        $post->save();
-
-        // Insertion of Log
-        $log = new Log;
-        $log->details = auth()->user()->name . " created post " . $post->title;
-        $log->save();
-
-        return redirect('/posts')->with('success','Post Created');
+        //
     }
 
     /**
@@ -101,13 +49,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        try{
-            $post = POST::find($id);
-            $post->title = $post->title;
-        }catch(Exception $e){
-            abort(404);
-        }
-        return view('posts/show')->with('post',$post);
+        $post = POST::find($id);
+
+        return view('admin.viewPost')->with('post',$post);
     }
 
     /**
@@ -120,12 +64,7 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
 
-        // Checking for unauthorized user
-        if(auth()->user()->id != $post->user_id){
-            return redirect('/posts')->with('error','Unauthorized Page');
-        }
-
-        return view('posts.edit')->with('post',$post);
+        return view('admin.editPost')->with('post',$post);
     }
 
     /**
@@ -178,7 +117,7 @@ class PostsController extends Controller
         }
         $post->save();
 
-        return redirect('/posts')->with('success','Post Updated');
+        return redirect('/admin-panel/posts')->with('success','Post Updated');
     }
 
     /**
@@ -191,10 +130,6 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         
-        // Checking for unauthorized user
-        if(auth()->user()->id != $post->user_id){
-            return redirect('/posts')->with('error','Unauthorized Page');
-        }
         if($post->cover_image != 'noname.jpg'){
             Storage::delete('public/cover_images/'.$post->cover_image);
         }
@@ -205,6 +140,6 @@ class PostsController extends Controller
         $log->details = auth()->user()->name . " deleted post " . $post->title;
         $log->save();
 
-        return redirect('/posts')->with('success','Post Removed');
+        return redirect('/admin-panel/posts')->with('success','Post Removed');
     }
 }

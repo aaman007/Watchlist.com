@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Exception;
+
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 use App\Show;
@@ -184,12 +188,17 @@ class ShowsController extends Controller
      */
     public function show($id)
     {
-        $show = Show::find($id);
-        $popularity = Show::where('watch_count','>',$show->watch_count)->count() + 1;
-        $ranked = Show::where('rating','>',$show->rating)->count() + 1;
-        $status = "Add to list";
-        $rateIt = "Rate It";
-        $watchedEpisodes = 0;
+        try{
+            $show = Show::find($id);
+            $popularity = Show::where('watch_count','>',$show->watch_count)->count() + 1;
+            $ranked = Show::where('rating','>',$show->rating)->count() + 1;
+            $status = "Add to list";
+            $rateIt = "Rate It";
+            $watchedEpisodes = 0;
+        }
+        catch(Exception $e){
+            abort(404);
+        }
 
         if(!auth()->guest())
         {
@@ -215,7 +224,9 @@ class ShowsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $show = Show::find($id);
+
+        return view('shows.edit')->with('show',$show);
     }
 
     /**
@@ -227,7 +238,51 @@ class ShowsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required|max:140',
+            'plot' => 'required',
+            'cover_image' => 'nullable|image|max:1999',
+            'episodes' => 'required|numeric',
+            'premiere_date' => 'required|date',
+            'status' => 'required',
+            'category' => 'required'
+
+        ]);
+        $show = Show::find($id);
+
+        // Handle file upload
+        if($request->hasFile('cover_image'))
+        {
+            // Get filename with extention
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            // Get filename
+            $filename = pathinfo($filenameWithExt,PATHINFO_FILENAME);
+            // Get Extension
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            $filenameToStore = $filename . "_" . time() . "." . $extension;
+            // Upload Image
+            $path = $request->file('cover_image')->storeAs('public/cover_images',$filenameToStore);
+
+            if($show->cover_image != "nocover.jpg")
+                Storage::delete('public/cover_images/'.$show->cover_image);
+            $show->cover_image = $filenameToStore;
+        }
+
+        // Storing data in database
+        $show->name = $request->input('name');
+        $show->plot = $request->input('plot');
+        $show->episodes = $request->input('episodes');
+        $show->premiere_date = $request->input('premiere_date');
+        $show->status = $request->input('status');
+        $show->category = $request->input('category');
+        $show->save();
+
+        // Adding Logs
+        $log = new Log;
+        $log->details = auth()->user()->name . " edited a show named " . $show->name;
+        $log->save();
+
+        return redirect('/admin-panel/shows')->with('success','Updated Successfully');
     }
 
     /**
@@ -238,6 +293,18 @@ class ShowsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $show = Show::find($id);
+        
+        if($show->cover_image != 'nocover.jpg'){
+            Storage::delete('public/cover_images/'.$show->cover_image);
+        }
+        $show->delete();
+
+        // Insertion of Log
+        $log = new Log;
+        $log->details = auth()->user()->name . " deleted show named " . $show->name;
+        $log->save();
+
+        return redirect('/admin-panel/shows')->with('success','Show Removed');
     }
 }
