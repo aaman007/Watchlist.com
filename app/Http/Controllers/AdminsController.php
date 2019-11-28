@@ -8,6 +8,7 @@ use App\Log;
 use App\Post;
 use App\User;
 use App\Show;
+use App\Statistic;
 
 class AdminsController extends Controller
 {
@@ -50,6 +51,57 @@ class AdminsController extends Controller
     {
         $shows = Show::orderBy('created_at','desc')->paginate(15);
         return view('admin.shows_list')->with('shows',$shows);
+    }
+    public function getWatchCount($id)
+    {
+        return Statistic::where('show_id',$id)->where('status','Completed')->count();
+    }
+    public function getRatingCount($id)
+    {
+       return Statistic::where('show_id',$id)->where('rating','>',0)->count();
+    }
+    public function getRatingSum($id)
+    {
+        return Statistic::where('show_id',$id)->where('rating','!=','')->sum('rating');
+    }
+    public function viewShow($id)
+    {
+        try{
+            $show = Show::find($id);
+            $show->watch_count = self::getWatchCount($id);
+            $show->rating_count = self::getRatingCount($id);
+            if($show->rating_count)
+                $show->rating = self::getRatingSum($id) / (1.0 * $show->rating_count);
+            $popularity = Show::where('watch_count','>',$show->watch_count)->where('category',$show->category)->count() + 1;
+            $ranked = Show::where('rating','>',$show->rating)->where('category',$show->category)->count() + 1;
+            $status = "Add to list";
+            $rateIt = "Rate It";
+            $watchedEpisodes = 0;
+        }
+        catch(Exception $e){
+            //abort(404);
+        }
+
+        if(!auth()->guest())
+        {
+            if(Statistic::where('user_id',auth()->id())->where('show_id',$id)->exists())
+            {
+                $statistic = Statistic::where('user_id',auth()->id())->where('show_id',$id)->first();
+                $rateIt = $statistic->rating;
+                $status = $statistic->status;
+                $watchedEpisodes = $statistic->episodes;
+            }
+        }
+
+        $data = array(
+            'popularity' => $popularity,
+            'ranked' => $ranked,
+            'show' => $show,
+            'status' => $status,
+            'rateIt' => $rateIt,
+            'watchedEpisodes' => $watchedEpisodes
+        );
+        return view('admin.viewShow')->with($data);
     }
     public function getTitleByRank($rank)
     {

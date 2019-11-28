@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Statistic;
+use App\Show;
+
 class StatisticsController extends Controller
 {
     /**
@@ -68,7 +71,42 @@ class StatisticsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(auth()->guest())
+            return redirect('/login');
+        
+        $show = Show::find($id);
+        $rating = $request->input('rateIt');
+        $status = $request->input('status');
+        $episodes = $request->input('episodesWatched');
+        
+        if($episodes == "")
+            $episodes = 0;
+        if($rating == "")
+            $rating = 0;
+        if($status == "Completed")
+            $episodes = $show->episodes;
+        if($episodes == $show->episodes)
+            $status = "Completed";
+        if($episodes && $status == "")
+            $status = ($episodes == $show->episodes) ? "Completed" : "Watching";
+        if($rating > 0 && $status == "")
+            $status = "Watching";
+
+        if(Statistic::where('user_id',auth()->id())->where('show_id',$id)->exists())
+            $statistic = Statistic::where('user_id',auth()->id())->where('show_id',$id)->first();
+        else
+        {
+            $statistic = new Statistic;
+            $statistic->user_id = auth()->id();
+            $statistic->show_id = $id;
+        }
+
+        $statistic->status = $status;
+        $statistic->episodes = $episodes;
+        $statistic->rating = $rating;
+        $statistic->save();
+
+        return back();
     }
 
     /**

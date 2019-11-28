@@ -21,6 +21,7 @@
                                 <img src="/storage/cover_images/{{$show->cover_image}}" height="80" width="60">
                                 <div class="col">
                                     <a href="shows/{{$show->id}}"> <h5>{{$show->name}}</h5> </a>
+                                    <small>Category : {{$show->category}}</small> <br>
                                     <small> Premiere Date : {{$show->premiere_date}} </small> <br>
                                     <small>Episodes : {{$show->episodes}}</small>
                                 </div>

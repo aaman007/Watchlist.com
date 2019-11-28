@@ -47,6 +47,8 @@ Route::get('top-rated-hollywood','ShowsController@topRatedHollywood');
 Route::get('most-watched-bollywood','ShowsController@mostWatchedBollywood');
 Route::get('top-rated-bollywood','ShowsController@topRatedBollywood');
 
+Route::get('anime-search','ShowsController@searchAnime');
+
 /// Users Route
 Route::get('/users/user-search','UsersController@search');
 Route::resource('users','UsersController');
@@ -61,7 +63,7 @@ Route::get('admin-panel/users/promote/{id}','AdminsController@promote');
 Route::get('admin-panel/users/demote/{id}','AdminsController@demote');
 Route::get('admin-panel/admins','AdminsController@showAdmins');
 Route::get('admin-panel/shows','AdminsController@showShows');
-
+Route::get('admin-panel/shows/{id}','AdminsController@viewShow');
 
 
 // Staistics Controller Routes

@@ -65,7 +65,6 @@
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="padding:10px;">
                     <a class="dropdown-item" href="/dashboard">User Panel</a> <br>
-
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
@@ -90,7 +89,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/storage/profile_pictures/{{Auth::user()->profile_picture}}" class="img-circle" alt="User Image">
+          <img src="/storage/profile_pictures/{{Auth::user()->profile_picture}}" class="img-responsive" style="background-position:center;background-size:cover;height:50px;width:50px;border-radius: 50%;" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{Auth::user()->name}}</p>

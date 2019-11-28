@@ -93,8 +93,13 @@
                 <li class="nav-item p-2">
                         <a class="nav-link" style="color:black;" href="/users">Users<span class="sr-only"></a>
                     </li>
-                <li class="nav-item p-2">
+                <!-- <li class="nav-item p-2">
                         <a class="nav-link" style="color:black;" href="/about">About<span class="sr-only"></a>
+                </li> -->
+                <li class="nav-item p-2">
+                    <form class="form-inline" action="/anime-search" method="GET">
+                        <input class="form-control" name = "search" placeholder="Search">
+                    </form>
                 </li>
             </ul>
 
