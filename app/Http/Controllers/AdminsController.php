@@ -139,6 +139,8 @@ class AdminsController extends Controller
     public function promote($id)
     {
         $user = User::find($id);
+        if($user->id - auth()->id() <= 0)
+            abort(404);
         $user->rank = self::getNextUpperRank($user->rank);
         $user->title = self::getTitleByRank($user->rank);
         $user->role = self::getUserRole($user->rank);
@@ -154,6 +156,8 @@ class AdminsController extends Controller
     public function demote($id)
     {
         $user = User::find($id);
+        if($user->id - auth()->id() <= 0)
+            abort(404);
         $user->rank = self::getNextLowerRank($user->rank);
         $user->title = self::getTitleByRank($user->rank);
         $user->role = self::getUserRole($user->rank);

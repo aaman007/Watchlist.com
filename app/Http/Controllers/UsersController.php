@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Log;
+use App\Statistic;
 
 class UsersController extends Controller
 {
@@ -30,6 +31,24 @@ class UsersController extends Controller
     {
         $user = User::find(auth()->user()->id);
         return view('users.update_details')->with('user',$user);
+    }
+    public function profile()
+    {
+        $user = auth()->user();
+        $watching = Statistic::where('user_id',$user->id)->where('status','Watching')->count();
+        $completed = Statistic::where('user_id',$user->id)->where('status','Completed')->count();
+        $planToWatch = Statistic::where('user_id',$user->id)->where('status','Plan To Watch')->count();
+        $onHold = Statistic::where('user_id',$user->id)->where('status','On Hold')->count();
+        $dropped = Statistic::where('user_id',$user->id)->where('status','deopped')->count();
+        $data = array(
+            'user' => $user,
+            'watching' => $watching,
+            'completed' => $completed,
+            'onHold' => $onHold,
+            'dropped' => $dropped,
+            'planToWatch' => $planToWatch
+        );
+        return view('users.profile')->with($data);
     }
 
     /**
@@ -61,7 +80,24 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        $watching = Statistic::where('user_id',$user->id)->where('status','Watching')->count();
+        $completed = Statistic::where('user_id',$user->id)->where('status','Completed')->count();
+        $planToWatch = Statistic::where('user_id',$user->id)->where('status','Plan To Watch')->count();
+        $onHold = Statistic::where('user_id',$user->id)->where('status','On Hold')->count();
+        $dropped = Statistic::where('user_id',$user->id)->where('status','deopped')->count();
+        $data = array(
+            'user' => $user,
+            'watching' => $watching,
+            'completed' => $completed,
+            'onHold' => $onHold,
+            'dropped' => $dropped,
+            'planToWatch' => $planToWatch
+        );
+        if(auth()->guest() || auth()->id() != $user->id)
+            return view('users.user_profile')->with($data);
+        else
+            return redirect('/profile');
     }
 
     /**

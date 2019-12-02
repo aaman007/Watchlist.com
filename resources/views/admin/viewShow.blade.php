@@ -18,20 +18,24 @@
     <section class="content">
         <div class="well">
             <h1> {{$show->name}} </h1>
-            <img src="/storage/cover_images/{{$show->cover_image}}" width="40%">
-            <br><br>
-            <div class="">
-                <strong> Rating : {{$show->rating}} [ Rated by {{$show->rating_count}} Users ] </strong><br>
-                <strong> Ranked : #{{$ranked}} </strong> <br>
-                <strong> Popularity : #{{$popularity}} </strong> <br>
-                <strong> Watch Count : {{$show->watch_count}} </strong> <br>
-                <strong> Category : {{$show->category}} </strong> <br>
-                <strong> Episodes : {{$show->episodes}} </strong> <br>
-                <strong> Status : {{$show->status}} </strong> <br>
-                <strong> Premiere Date : {{$show->premiere_date}} </strong> <br>
-                <br>
-                <strong>Plot</strong><br>
-                {{$show->plot}}
+            <div class="row">
+                <div class="col-sm-3">
+                    <img src="/storage/cover_images/{{$show->cover_image}}" witdth="100%">
+                </div>
+                <!-- <br><br> -->
+                <div class="col-sm-9">
+                    <strong> Rating : {{$show->rating}} [ Rated by {{$show->rating_count}} Users ] </strong><br>
+                    <strong> Ranked : #{{$ranked}} </strong> <br>
+                    <strong> Popularity : #{{$popularity}} </strong> <br>
+                    <strong> Watch Count : {{$show->watch_count}} </strong> <br>
+                    <strong> Category : {{$show->category}} </strong> <br>
+                    <strong> Episodes : {{$show->episodes}} </strong> <br>
+                    <strong> Status : {{$show->status}} </strong> <br>
+                    <strong> Premiere Date : {{$show->premiere_date}} </strong> <br>
+                    <br>
+                    <strong>Plot</strong><br>
+                    {{$show->plot}}
+                </div>
             </div>
         </div>
     </section>

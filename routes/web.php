@@ -53,6 +53,7 @@ Route::get('anime-search','ShowsController@searchAnime');
 Route::get('/users/user-search','UsersController@search');
 Route::resource('users','UsersController');
 Route::get('/update-details','UsersController@update_details');
+Route::get('/profile','UsersController@profile');
 
 // Admin Controller Routes
 Route::get('/admin-panel','AdminsController@index');

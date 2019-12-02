@@ -83,22 +83,30 @@ class StatisticsController extends Controller
             $episodes = 0;
         if($rating == "")
             $rating = 0;
-        if($status == "Completed")
-            $episodes = $show->episodes;
-        if($episodes == $show->episodes)
-            $status = "Completed";
         if($episodes && $status == "")
             $status = ($episodes == $show->episodes) ? "Completed" : "Watching";
         if($rating > 0 && $status == "")
             $status = "Watching";
 
         if(Statistic::where('user_id',auth()->id())->where('show_id',$id)->exists())
+        {
             $statistic = Statistic::where('user_id',auth()->id())->where('show_id',$id)->first();
+            
+            if($status == "Completed" && $statistic->episodes != $show->episodes)
+                $episodes = $show->episodes;
+            if($episodes == $show->episodes && $statistic->status != "Completed")
+                $status = "Completed";
+        }
         else
         {
             $statistic = new Statistic;
             $statistic->user_id = auth()->id();
             $statistic->show_id = $id;
+
+            if($status == "Completed")
+                $episodes = $show->episodes;
+            if($episodes == $show->episodes)
+                $status = "Completed";
         }
 
         $statistic->status = $status;
