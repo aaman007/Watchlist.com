@@ -52,10 +52,21 @@ Route::get('anime-search','ShowsController@searchAnime');
 /// Users Route
 Route::get('/users/user-search','UsersController@search');
 Route::resource('users','UsersController');
+Route::get('/users/{id}/watching','UsersController@watching');
+Route::get('/users/{id}/completed','UsersController@completed');
+Route::get('/users/{id}/on-hold','UsersController@onHold');
+Route::get('/users/{id}/dropped','UsersController@dropped');
+Route::get('/users/{id}/plan-to-watch','UsersController@planToWatch');
 Route::get('/update-details','UsersController@update_details');
 Route::get('/profile','UsersController@profile');
+Route::get('/profile/watching','UsersController@myWatching');
+Route::get('/profile/completed','UsersController@myCompleted');
+Route::get('/profile/on-hold','UsersController@myOnHold');
+Route::get('/profile/dropped','UsersController@myDropped');
+Route::get('/profile/plan-to-watch','UsersController@myPlanToWatch');
 
 // Admin Controller Routes
+Route::get('/admin-panel/shows/filter','AdminsController@filter');
 Route::get('/admin-panel','AdminsController@index');
 Route::get('/admin-panel/logs','AdminsController@logs');
 Route::get('admin-panel/posts','AdminsController@showPosts');

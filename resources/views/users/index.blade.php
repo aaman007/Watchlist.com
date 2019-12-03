@@ -4,7 +4,7 @@
 
     <h1>Users</h1>
 
-    <form class="form-inline my-2 my-lg-0" action="/users/user-search" method="GET">
+    <form class="form-inline my-2 my-lg-0" action="/users/user-search" method="PUT">
         <input class="form-control mr-sm-2" name = "search" placeholder="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form> <br>
@@ -36,7 +36,7 @@
         </div>
         @endforeach
         <br>
-        {{$users->links()}} <!-- Pagination -->
+        {{$users->render()}} <!-- Pagination -->
     @else
         <p>No Users Found</p>
     @endif

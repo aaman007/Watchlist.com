@@ -142,10 +142,10 @@ class ShowsController extends Controller
         );
         return view('shows.shows_list')->with($data);
     }
-    public function searchAnime()
+    public function searchAnime(Request $request)
     {
         self::updateShows();
-        $search = $_GET['search'];
+        $search = $request->input('search');
         $shows = Show::where('name',$search)->orWhere('name','like','%'.$search.'%')->orderBy('name','asc')->paginate(10);
         $data = array(
             'header' => 'Search results for ' . $search,

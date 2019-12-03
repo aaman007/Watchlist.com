@@ -16,6 +16,24 @@
     </section>
 
     <section class="content">
+        <div class="pull-right col-md-4">
+            <form action="/admin-panel/shows/filter" method="PUT">
+                @csrf
+                <div class="form-group">
+                     <select class="form-control" name="filterBy" onchange="this.form.submit()">
+                        <option value="" selected disabled>Filter By</option>
+                        <option value="Anime">Anime</option>
+                        <option value="TV">TV Series</option>
+                        <option value="Hollywood">Hollywood</option>
+                        <option value="Bollywood">Bollywood</option>
+                        <option value="Airing">Airing</option>
+                        <option value="Not Aired">Not Aired</option>
+                        <option value="Completed">Completed</option>
+                        <option value="My">My Shows</option>
+                    </select>
+                </div>
+            </form>
+        </div>
         @if(count($shows))
             <table class="table table-striped text-center">
                 <tr>
@@ -37,7 +55,7 @@
             </table>
             {{$shows->links()}} <!-- Pagination -->
         @else
-            No Posts Available
+            No Shows Available
         @endif
     </section>
 

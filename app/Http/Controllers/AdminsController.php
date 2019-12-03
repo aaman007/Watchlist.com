@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Exception;
 
 use App\Log;
 use App\Post;
@@ -12,6 +13,11 @@ use App\Statistic;
 
 class AdminsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $users = User::all()->count();
@@ -27,6 +33,8 @@ class AdminsController extends Controller
         );
         return view('admin.home')->with($data);
     }
+
+    /// List of Logs,Posts,Admins,Shows,Users
     public function logs()
     {
         $logs = Log::orderBy('created_at','desc')->paginate(15);
@@ -52,6 +60,8 @@ class AdminsController extends Controller
         $shows = Show::orderBy('created_at','desc')->paginate(15);
         return view('admin.shows_list')->with('shows',$shows);
     }
+
+    /// View Show's Details
     public function getWatchCount($id)
     {
         return Statistic::where('show_id',$id)->where('status','Completed')->count();
@@ -79,7 +89,7 @@ class AdminsController extends Controller
             $watchedEpisodes = 0;
         }
         catch(Exception $e){
-            //abort(404);
+            abort(404);
         }
 
         if(!auth()->guest())
@@ -103,6 +113,9 @@ class AdminsController extends Controller
         );
         return view('admin.viewShow')->with($data);
     }
+
+
+    /// User Promotion and Demotion
     public function getTitleByRank($rank)
     {
         if($rank == 1)
@@ -169,5 +182,37 @@ class AdminsController extends Controller
         $log->save();
 
         return redirect('/admin-panel/users')->with('success','User Demoted Successfully');
+    }
+
+
+    // Filtering Shows
+    public function filterByCategory($category)
+    {
+        return Show::where('category',$category)->orderBy('created_at','desc')->paginate(15);
+    }
+    public function filterByStatus($status)
+    {
+        return Show::where('status',$status)->orderBy('premiere_date','asc')->paginate(15);
+    }
+    public function filterByMyShows()
+    {
+        return Show::where('user_id',auth()->id())->orderBy('created_at','desc')->paginate(15);
+    }
+    public function filterByMyName($name)
+    {
+        return Show::where('name','like','%'.$name.'%')->orderBy('name','asc')->paginate(15);
+    }
+    public function filter(Request $request)
+    {
+        $input = $request->input('filterBy');
+
+        if($input == "Anime" || $input == "TV" || $input == "Hollywood" || $input == "Bollywood")
+            return view('admin.shows_list')->with('shows',self::filterByCategory($input));
+        else if($input == "Airing" || $input == "Not Aired" || $input == "Completed")
+            return view('admin.shows_list')->with('shows',self::filterByStatus($input));
+        else if($input == "My")
+            return view('admin.shows_list')->with('shows',self::filterByMyShows($input));
+        else
+            return view('admin.shows_list')->with('shows',self::filterByMyName($input));
     }
 }

@@ -6,18 +6,30 @@
             <div class="card">
                 <div class="card-header">Details</div>
                 <div class="card-body">
-                    <img src="/storage/profile_pictures/{{$user->profile_picture}}" height="60%" width="60%"> <br><br>
-                    Name : {{$user->name}} <br>
-                    Email : {{$user->email}} <br>
-                    @if($user->gender != "")
-                        Gender : {{$user->gender}} <br>
-                    @endif
-                    @if($user->city != "")
-                        City : {{$user->city}} <br>
-                    @endif
-                    @if($user->country != "")
-                        Country : {{$user->country}} <br>
-                    @endif
+                    <div class="row justify-content-center align-self-center">
+                        <div class="col-md-6">
+                            <img src="/storage/profile_pictures/{{$user->profile_picture}}" width="100%" height="100%" class="rounded-circle"/>
+                        </div>
+                        <div class="col-md-4 justify-content-center align-self-center">
+                            <p><i class="fa fa-user"> {{$user->name}}</i></p> 
+                            @if($user->city != "" && $user->country != "")
+                                <p><i class="fa fa-map-marker"> {{$user->city}},{{$user->country}}</i></p>
+                            @elseif($user->city != "" || $user->country != "")
+                                <p><i class="fa fa-map-marker"> {{$user->city}},{{$user->country}}</i></p>
+                            @else
+                                <p><i class="fa fa-map-marker"> N/A </i></p>
+                            @endif
+                            <p><i class="fa fa-envelope"> {{$user->email}}</i></p> 
+                            @if($user->gender == "Male")
+                                <p><i class="fa fa-male"> {{$user->gender}}</i></p>
+                            @elseif($user->gender == "Female")
+                                <p><i class="fa fa-female"> {{$user->gender}}</i></p>
+                            @else
+                                <p><i class="fa fa-male"> N/A </i></p>
+                            @endif
+                            <p><i class="fa fa-globe"> www.google.com </i></p>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer"></div>
             </div>
