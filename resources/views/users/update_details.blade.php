@@ -64,6 +64,12 @@
                     </th>
                 </tr>
                 <tr>
+                    <th>Website </th>
+                    <th>
+                        <input class="form-control" name="website" type="url" value="{{$user->website}}">
+                    </th>
+                </tr>
+                <tr>
                     <th>Current Password  </th>
                     <th>
                          <input class="form-control" name="currentPassword" type="password" placeholder="">

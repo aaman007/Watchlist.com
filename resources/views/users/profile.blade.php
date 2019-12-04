@@ -2,20 +2,20 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 mb-2">
             <div class="card">
                 <div class="card-header">Details</div>
                 <div class="card-body">
                     <div class="row justify-content-center align-self-center">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <img src="/storage/profile_pictures/{{$user->profile_picture}}" width="100%" height="100%" class="rounded-circle"/>
                         </div>
-                        <div class="col-md-4 justify-content-center align-self-center">
+                        <div class="col-md-5 justify-content-center align-self-center">
                             <p><i class="fa fa-user"> {{$user->name}}</i></p> 
                             @if($user->city != "" && $user->country != "")
                                 <p><i class="fa fa-map-marker"> {{$user->city}},{{$user->country}}</i></p>
                             @elseif($user->city != "" || $user->country != "")
-                                <p><i class="fa fa-map-marker"> {{$user->city}},{{$user->country}}</i></p>
+                                <p><i class="fa fa-map-marker"> {{$user->city}}{{$user->country}}</i></p>
                             @else
                                 <p><i class="fa fa-map-marker"> N/A </i></p>
                             @endif
@@ -27,7 +27,11 @@
                             @else
                                 <p><i class="fa fa-male"> N/A </i></p>
                             @endif
-                            <p><i class="fa fa-globe"> www.google.com </i></p>
+                            @if($user->website != "")
+                                <p><i class="fa fa-globe"> {{$user->website}} </i></p>
+                            @else
+                                <p><i class="fa fa-globe"> N/A </i></p>
+                            @endif
                         </div>
                     </div>
                 </div>

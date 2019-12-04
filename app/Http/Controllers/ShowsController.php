@@ -14,6 +14,15 @@ use App\Statistic;
 
 class ShowsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth' , ['only' => ['create','update','destroy','edit']]);
+    }
+    public function checkEligibility()
+    {
+        if(auth()->guest() || auth()->user()->role == "User")
+            abort(404);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +30,7 @@ class ShowsController extends Controller
      */
     public function index()
     {
-        //
+        abort(404);
     }
 
     public function updateShows()
@@ -147,6 +156,7 @@ class ShowsController extends Controller
         self::updateShows();
         $search = $request->input('search');
         $shows = Show::where('name',$search)->orWhere('name','like','%'.$search.'%')->orderBy('name','asc')->paginate(10);
+        $shows->appends(['search' => $search]);
         $data = array(
             'header' => 'Search results for ' . $search,
             'shows' => $shows
@@ -161,6 +171,8 @@ class ShowsController extends Controller
      */
     public function create()
     {
+        self::checkEligibility();
+
         return view('shows.create');
     }
 
@@ -172,6 +184,8 @@ class ShowsController extends Controller
      */
     public function store(Request $request)
     {
+        self::checkEligibility();
+
         $this->validate($request,[
             'name' => 'required|max:140',
             'plot' => 'required',
@@ -282,6 +296,8 @@ class ShowsController extends Controller
      */
     public function edit($id)
     {
+        self::checkEligibility();
+
         $show = Show::find($id);
 
         return view('shows.edit')->with('show',$show);
@@ -296,6 +312,8 @@ class ShowsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        self::checkEligibility();
+
         $this->validate($request,[
             'name' => 'required|max:140',
             'plot' => 'required',
@@ -351,6 +369,8 @@ class ShowsController extends Controller
      */
     public function destroy($id)
     {
+        self::checkEligibility();
+
         $show = Show::find($id);
         
         if($show->cover_image != 'nocover.jpg'){

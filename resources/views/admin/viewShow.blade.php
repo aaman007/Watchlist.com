@@ -19,11 +19,11 @@
         <div class="well">
             <h1> {{$show->name}} </h1>
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col pull-left" style="margin-right:10px;">
                     <img src="/storage/cover_images/{{$show->cover_image}}" witdth="100%">
                 </div>
                 <!-- <br><br> -->
-                <div class="col-sm-9">
+                <div width="col pull-left">
                     <strong> Rating : {{$show->rating}} [ Rated by {{$show->rating_count}} Users ] </strong><br>
                     <strong> Ranked : #{{$ranked}} </strong> <br>
                     <strong> Popularity : #{{$popularity}} </strong> <br>
@@ -37,6 +37,7 @@
                     {{$show->plot}}
                 </div>
             </div>
+            <br>
         </div>
     </section>
 @endsection

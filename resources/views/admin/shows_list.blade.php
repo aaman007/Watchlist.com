@@ -28,7 +28,7 @@
                         <option value="Bollywood">Bollywood</option>
                         <option value="Airing">Airing</option>
                         <option value="Not Aired">Not Aired</option>
-                        <option value="Completed">Completed</option>
+                        <option value="Finished">Finished</option>
                         <option value="My">My Shows</option>
                     </select>
                 </div>

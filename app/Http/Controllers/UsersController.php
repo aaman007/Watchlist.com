@@ -13,6 +13,15 @@ use App\Show;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth' , ['only' => ['create','update','destroy','store','profile']]);
+    }
+    public function checkEligibility()
+    {
+        if(auth()->guest())
+            abort(404);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -22,13 +31,14 @@ class UsersController extends Controller
      /// User Profile and List Related Functions
     public function index()
     {
-        $users = User::orderBy('name','asc')->paginate(10);
+        $users = User::orderBy('name','asc')->paginate(15);
         return view('users.index')->with('users',$users);
     }
     public function search(Request $request)
     {
         $search = $request->input('search');
         $users = User::where('name',$search)->orWhere('name','like','%'.$search.'%')->orderBy('name','asc')->paginate(15);
+        $users->appends(['search' => $search]);
         return view('users.index')->with('users',$users);
     }
     public function update_details()
@@ -42,8 +52,8 @@ class UsersController extends Controller
         $watching = Statistic::where('user_id',$user->id)->where('status','Watching')->count();
         $completed = Statistic::where('user_id',$user->id)->where('status','Completed')->count();
         $planToWatch = Statistic::where('user_id',$user->id)->where('status','Plan To Watch')->count();
-        $onHold = Statistic::where('user_id',$user->id)->where('status','On Hold')->count();
-        $dropped = Statistic::where('user_id',$user->id)->where('status','deopped')->count();
+        $onHold = Statistic::where('user_id',$user->id)->where('status','On-Hold')->count();
+        $dropped = Statistic::where('user_id',$user->id)->where('status','dropped')->count();
         $data = array(
             'user' => $user,
             'watching' => $watching,
@@ -84,14 +94,15 @@ class UsersController extends Controller
     }
     // Other User's Watchlist Functions
     public function watching($id)
-    {
+    {        
         self::updateShows();
         $shows = DB::table('shows')
                 ->select(['shows.id','shows.name','shows.cover_image','shows.category','shows.premiere_date','shows.episodes','shows.rating','shows.watch_count'])
                 ->join('statistics','statistics.show_id','=','shows.id')
                 ->where('statistics.user_id',$id)
                 ->where('statistics.status','Watching')
-                ->paginate(5);
+                ->orderBy('name','asc')
+                ->paginate(15);
         $data = array(
             'header' => 'Watching',
             'shows' => $shows
@@ -106,7 +117,8 @@ class UsersController extends Controller
                 ->join('statistics','statistics.show_id','=','shows.id')
                 ->where('statistics.user_id',$id)
                 ->where('statistics.status','Completed')
-                ->paginate(5);
+                ->orderBy('name','asc')
+                ->paginate(15);
         $data = array(
             'header' => 'Completed',
             'shows' => $shows
@@ -121,7 +133,8 @@ class UsersController extends Controller
                 ->join('statistics','statistics.show_id','=','shows.id')
                 ->where('statistics.user_id',$id)
                 ->where('statistics.status','On-Hold')
-                ->paginate(5);
+                ->orderBy('name','asc')
+                ->paginate(15);
         $data = array(
             'header' => 'On Hold',
             'shows' => $shows
@@ -136,7 +149,8 @@ class UsersController extends Controller
                 ->join('statistics','statistics.show_id','=','shows.id')
                 ->where('statistics.user_id',$id)
                 ->where('statistics.status','dropped')
-                ->paginate(5);
+                ->orderBy('name','asc')
+                ->paginate(15);
         $data = array(
             'header' => 'Dropped',
             'shows' => $shows
@@ -151,7 +165,8 @@ class UsersController extends Controller
                 ->join('statistics','statistics.show_id','=','shows.id')
                 ->where('statistics.user_id',$id)
                 ->where('statistics.status','Plan To Watch')
-                ->paginate(5);
+                ->orderBy('name','asc')
+                ->paginate(15);
         $data = array(
             'header' => 'Plan To Watch',
             'shows' => $shows
@@ -162,13 +177,16 @@ class UsersController extends Controller
     // My Watchlist Functions
     public function myWatching()
     {
+        self::checkEligibility();
+
         self::updateShows();
         $shows = DB::table('shows')
                 ->select(['shows.id','shows.name','shows.cover_image','shows.category','shows.premiere_date','shows.episodes','shows.rating','shows.watch_count'])
                 ->join('statistics','statistics.show_id','=','shows.id')
                 ->where('statistics.user_id',auth()->id())
                 ->where('statistics.status','Watching')
-                ->paginate(5);
+                ->orderBy('name','asc')
+                ->paginate(15);
         $data = array(
             'header' => 'Watching',
             'shows' => $shows
@@ -177,13 +195,16 @@ class UsersController extends Controller
     }
     public function myCompleted()
     {
+        self::checkEligibility();
+
         self::updateShows();
         $shows = DB::table('shows')
                 ->select(['shows.id','shows.name','shows.cover_image','shows.category','shows.premiere_date','shows.episodes','shows.rating','shows.watch_count'])
                 ->join('statistics','statistics.show_id','=','shows.id')
                 ->where('statistics.user_id',auth()->id())
                 ->where('statistics.status','Completed')
-                ->paginate(5);
+                ->orderBy('name','asc')
+                ->paginate(15);
         $data = array(
             'header' => 'Completed',
             'shows' => $shows
@@ -192,13 +213,16 @@ class UsersController extends Controller
     }
     public function myOnHold()
     {
+        self::checkEligibility();
+
         self::updateShows();
         $shows = DB::table('shows')
                 ->select(['shows.id','shows.name','shows.cover_image','shows.category','shows.premiere_date','shows.episodes','shows.rating','shows.watch_count'])
                 ->join('statistics','statistics.show_id','=','shows.id')
                 ->where('statistics.user_id',auth()->id())
                 ->where('statistics.status','On-Hold')
-                ->paginate(5);
+                ->orderBy('name','asc')
+                ->paginate(15);
         $data = array(
             'header' => 'On Hold',
             'shows' => $shows
@@ -207,13 +231,16 @@ class UsersController extends Controller
     }
     public function myDropped()
     {
+        self::checkEligibility();
+
         self::updateShows();
         $shows = DB::table('shows')
                 ->select(['shows.id','shows.name','shows.cover_image','shows.category','shows.premiere_date','shows.episodes','shows.rating','shows.watch_count'])
                 ->join('statistics','statistics.show_id','=','shows.id')
                 ->where('statistics.user_id',auth()->id())
                 ->where('statistics.status','dropped')
-                ->paginate(5);
+                ->orderBy('name','asc')
+                ->paginate(15);
         $data = array(
             'header' => 'Dropped',
             'shows' => $shows
@@ -222,13 +249,16 @@ class UsersController extends Controller
     }
     public function myPlanToWatch()
     {
+        self::checkEligibility();
+
         self::updateShows();
         $shows = DB::table('shows')
                 ->select(['shows.id','shows.name','shows.cover_image','shows.category','shows.premiere_date','shows.episodes','shows.rating','shows.watch_count'])
                 ->join('statistics','statistics.show_id','=','shows.id')
                 ->where('statistics.user_id',auth()->id())
                 ->where('statistics.status','Plan To Watch')
-                ->paginate(5);
+                ->orderBy('name','asc')
+                ->paginate(15);
         $data = array(
             'header' => 'Plan To Watch',
             'shows' => $shows
@@ -311,7 +341,8 @@ class UsersController extends Controller
             'name' => 'required',
             'currentPassword' => 'required',
             'newPassword' => 'nullable|min:8',
-            'profile_picture' => 'image|nullable|max:1999'
+            'profile_picture' => 'image|nullable|max:1999',
+            'website' => 'nullable|url'
         ]);
 
         $user = User::find($id);
@@ -329,6 +360,7 @@ class UsersController extends Controller
 
             $user->city = $request->input('city');
             $user->country = $request->input('country');
+            $user->website = $request->input('website');
 
             // Handle file upload
             if($request->hasFile('profile_picture')){

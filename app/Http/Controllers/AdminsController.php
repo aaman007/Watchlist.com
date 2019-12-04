@@ -17,9 +17,16 @@ class AdminsController extends Controller
     {
         $this->middleware('auth');
     }
+    public function checkEligibility()
+    {
+        if(auth()->guest() || auth()->user()->role == "User")
+            abort(404);
+    }
 
     public function index()
     {
+        self::checkEligibility();
+
         $users = User::all()->count();
         $shows = Show::all()->count();
         $posts = Post::all()->count();
@@ -37,26 +44,36 @@ class AdminsController extends Controller
     /// List of Logs,Posts,Admins,Shows,Users
     public function logs()
     {
+        self::checkEligibility();
+
         $logs = Log::orderBy('created_at','desc')->paginate(15);
         return view('admin.logs')->with('logs',$logs);
     }
     public function showPosts()
     {
+        self::checkEligibility();
+
         $posts = Post::orderBy('created_at','desc')->paginate(15);
         return view('admin.posts_list')->with('posts',$posts);
     }
     public function showAdmins()
     {
+        self::checkEligibility();
+
         $admins = User::where('Role','Admin')->orderBy('name','asc')->paginate(15);
         return view('admin.admins_list')->with('admins',$admins);
     }
     public function showUsers()
     {
+        self::checkEligibility();
+
         $users = User::orderBy('name','asc')->paginate(15);
         return view('admin.users_list')->with('users',$users);
     }
     public function showShows()
     {
+        self::checkEligibility();
+
         $shows = Show::orderBy('created_at','desc')->paginate(15);
         return view('admin.shows_list')->with('shows',$shows);
     }
@@ -76,6 +93,8 @@ class AdminsController extends Controller
     }
     public function viewShow($id)
     {
+        self::checkEligibility();
+
         try{
             $show = Show::find($id);
             $show->watch_count = self::getWatchCount($id);
@@ -151,6 +170,8 @@ class AdminsController extends Controller
     }
     public function promote($id)
     {
+        self::checkEligibility();
+
         $user = User::find($id);
         if($user->id - auth()->id() <= 0)
             abort(404);
@@ -168,6 +189,8 @@ class AdminsController extends Controller
     }
     public function demote($id)
     {
+        self::checkEligibility();
+
         $user = User::find($id);
         if($user->id - auth()->id() <= 0)
             abort(404);
@@ -204,15 +227,21 @@ class AdminsController extends Controller
     }
     public function filter(Request $request)
     {
+        self::checkEligibility();
+
         $input = $request->input('filterBy');
 
         if($input == "Anime" || $input == "TV" || $input == "Hollywood" || $input == "Bollywood")
-            return view('admin.shows_list')->with('shows',self::filterByCategory($input));
-        else if($input == "Airing" || $input == "Not Aired" || $input == "Completed")
-            return view('admin.shows_list')->with('shows',self::filterByStatus($input));
+            $shows = self::filterByCategory($input);
+        else if($input == "Airing" || $input == "Not Aired" || $input == "Finished")
+            $shows = self::filterByStatus($input);
         else if($input == "My")
-            return view('admin.shows_list')->with('shows',self::filterByMyShows($input));
+            $shows = self::filterByMyShows($input);
         else
-            return view('admin.shows_list')->with('shows',self::filterByMyName($input));
+            abort(404);
+
+        $shows->appends(['filterBy' => $input]);
+
+        return view('admin.shows_list')->with('shows',$shows);
     }
 }

@@ -9,6 +9,15 @@ use App\Log;
 
 class AdminPostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    public function checkEligibility()
+    {
+        if(auth()->guest() || auth()->user()->role == "User")
+            abort(404);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +25,8 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
+        self::checkEligibility();
+
         $posts = Post::orderBy('created_at','desc')->paginate(15);
         return view('admin.posts_list')->with('posts',$posts);
     }
@@ -49,6 +60,8 @@ class AdminPostsController extends Controller
      */
     public function show($id)
     {
+        self::checkEligibility();
+
         $post = POST::find($id);
 
         return view('admin.viewPost')->with('post',$post);
@@ -62,6 +75,8 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
+        self::checkEligibility();
+
         $post = Post::find($id);
 
         return view('admin.editPost')->with('post',$post);
@@ -76,6 +91,8 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        self::checkEligibility();
+
         $this->validate($request,[
             'title' => 'required|max:140', 
             'body' => 'required' ,
@@ -128,6 +145,8 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
+        self::checkEligibility();
+
         $post = Post::find($id);
         
         if($post->cover_image != 'noname.jpg'){
