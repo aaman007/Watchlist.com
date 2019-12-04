@@ -28,7 +28,7 @@
                         <tr>
                         <td>{{$log->id}}</td>
                         <td>{{$log->details}}</td>
-                        <td>{{$log->created_at}}</td>
+                        <td>{{$log->created_at->diffForHumans()}}</td>
                         </tr>
                     @endforeach
                     </table>
