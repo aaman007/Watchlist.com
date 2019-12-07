@@ -38,7 +38,7 @@
                 <div class="card-footer"></div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-2">
             <div class="card">
                 <div class="card-header">Statistics</div>
                 <div class="card-body">
@@ -69,4 +69,46 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-8 mb-2">
+            <div class="card">
+                <div class="card-header"> Blog Posts </div>
+                <div class="card-body">
+                    @if(count($posts))
+                    @foreach($posts as $post)
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="p-2">
+                                        <a style="text-decoration:none;" href="posts/{{$post->id}}"> <h5>{{$post->title}}</h5> </a>
+                                        <small>Written {{$post
+                                        ->created_at->diffForHumans()}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    <br>
+                    {{$posts->links()}} <!-- Pagination -->
+                    @else
+                        No Posts to show
+                    @endif
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        </div>
+        <!--
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top" src="/storage/profile_pictures/{{$user->profile_picture}}" alt="Card image">
+                <div class="card-body">
+                    <h4 class="card-title">{{$user->name}}</h4>
+                    <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                    <a href="/users/{{$user->id}}" class="btn btn-primary">See Profile</a>
+                </div>
+            </div>
+        </div>
+        -->
+    </div>
+    
 @endsection

@@ -106,6 +106,13 @@
             </span>
           </a>
         </li>
+        <li>
+            <a href="/">
+              <i class="fa fa-home"></i> <span>Home</span>
+              <span class="pull-right-container">
+              </span>
+            </a>
+          </li>
         <li class="treeview">
           <a href="/shows">
             <i class="fa fa-tv"></i>

@@ -10,6 +10,7 @@ use App\User;
 use App\Log;
 use App\Statistic;
 use App\Show;
+use App\Post;
 
 class UsersController extends Controller
 {
@@ -49,6 +50,7 @@ class UsersController extends Controller
     public function profile()
     {
         $user = auth()->user();
+        $posts = Post::where('user_id',$user->id)->orderBy('created_at','desc')->paginate(5);
         $watching = Statistic::where('user_id',$user->id)->where('status','Watching')->count();
         $completed = Statistic::where('user_id',$user->id)->where('status','Completed')->count();
         $planToWatch = Statistic::where('user_id',$user->id)->where('status','Plan To Watch')->count();
@@ -56,6 +58,7 @@ class UsersController extends Controller
         $dropped = Statistic::where('user_id',$user->id)->where('status','dropped')->count();
         $data = array(
             'user' => $user,
+            'posts' => $posts,
             'watching' => $watching,
             'completed' => $completed,
             'onHold' => $onHold,
@@ -298,6 +301,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+        $posts = Post::where('user_id',$user->id)->orderBy('created_at','desc')->paginate(5);
         $watching = Statistic::where('user_id',$user->id)->where('status','Watching')->count();
         $completed = Statistic::where('user_id',$user->id)->where('status','Completed')->count();
         $planToWatch = Statistic::where('user_id',$user->id)->where('status','Plan To Watch')->count();
@@ -305,6 +309,7 @@ class UsersController extends Controller
         $dropped = Statistic::where('user_id',$user->id)->where('status','dropped')->count();
         $data = array(
             'user' => $user,
+            'posts' => $posts,
             'watching' => $watching,
             'completed' => $completed,
             'onHold' => $onHold,

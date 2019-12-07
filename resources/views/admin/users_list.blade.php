@@ -37,7 +37,7 @@
                     </td>
                     <td>
                         @if(Auth::user()->id != $user->id)
-                            <a href="/admin-panel/users/{{$user->id}}" class="btn btn-info"> View</a>
+                            <a href="/users/{{$user->id}}" class="btn btn-info"> View</a>
                         @endif
 
                         @if($user->rank - Auth::user()->rank > 1)
