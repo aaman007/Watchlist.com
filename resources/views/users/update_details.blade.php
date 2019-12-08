@@ -12,7 +12,7 @@
                 <tr>
                     <th>Name  </th>
                     <th>
-                         <input class="form-control" name="name" type="text" value="{{$user->name}}">
+                         <input class="form-control" name="name" type="text" value="{{$user->name}}" required>
                     </th>
                 </tr>
 
@@ -72,7 +72,7 @@
                 <tr>
                     <th>Current Password  </th>
                     <th>
-                         <input class="form-control" name="currentPassword" type="password" placeholder="">
+                         <input class="form-control" name="currentPassword" type="password" placeholder="" required>
                     </th>
                 </tr>
                 <tr>
