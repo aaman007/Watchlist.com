@@ -7,11 +7,22 @@
                 <div class="card-header">Details</div>
                 <div class="card-body">
                     <div class="row justify-content-center align-self-center">
-                        <div class="col-md-6 mb-2">
+                        <div class="col-md-5 mb-2">
                             <img src="/storage/profile_pictures/{{$user->profile_picture}}" width="100%" height="100%" class="rounded-circle"/>
                         </div>
-                        <div class="col-md-4 justify-content-center align-self-center">
+                        <div class="col-md-5 justify-content-center align-self-center">
                             <p><i class="fa fa-user"> {{$user->name}}</i></p> 
+                            <p><i class="fa fa-star">
+                                @if($user->rank == 1)
+                                    <span class='text-primary text-bold'>{{$user->title}}</span>
+                                @elseif($user->rank == 2)
+                                    <span class='text-success text-bold'>{{$user->title}}</span>
+                                @elseif($user->rank == 3)
+                                    <span class='text-info text-bold'>{{$user->title}}</span>
+                                @else
+                                    <span class='text-secondary text-bold'>{{$user->title}}</span>
+                                @endif
+                            </i></p>
                             @if($user->city != "" && $user->country != "")
                                 <p><i class="fa fa-map-marker"> {{$user->city}},{{$user->country}}</i></p>
                             @elseif($user->city != "" || $user->country != "")
@@ -28,17 +39,18 @@
                                 <p><i class="fa fa-male"> N/A </i></p>
                             @endif
                             @if($user->website != "")
-                                <p><i class="fa fa-globe"> {{$user->website}} </i></p>
+                                <p><i class="fa fa-globe"> <a href="{{$user->website}}"> {{$user->website}}</a> </i></p>
                             @else
                                 <p><i class="fa fa-globe"> N/A </i></p>
                             @endif
+                            <p><i class="fa fa-registered"> {{$user->created_at->diffForHumans()}} </i></p>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer"></div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-2">
             <div class="card">
                 <div class="card-header">Statistics</div>
                 <div class="card-body">
@@ -75,20 +87,7 @@
                 <div class="card-header"> Blog Posts </div>
                 <div class="card-body">
                     @if(count($posts))
-                    @foreach($posts as $post)
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="p-2">
-                                        <a style="text-decoration:none;" href="posts/{{$post->id}}"> <h5>{{$post->title}}</h5> </a>
-                                        <small>Written {{$post->created_at->diffForHumans()}}</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    <br>
-                    {{$posts->links()}} <!-- Pagination -->
+                        @include('users.userPosts')
                     @else
                         No Posts to show
                     @endif

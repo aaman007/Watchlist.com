@@ -17,8 +17,9 @@
 
     <section class="content">
         <div class="well">
-            <h1> {{$show->name}} </h1>
-            <div class="row">
+            <div class="row" style="padding:5px;">
+                 <h1> {{$show->name}} </h1>
+
                 <div class="col pull-left" style="margin-right:10px;">
                     <img src="/storage/cover_images/{{$show->cover_image}}" witdth="100%">
                 </div>

@@ -67,6 +67,11 @@ class UsersController extends Controller
         );
         return view('users.profile')->with($data);
     }
+    public function myPosts(Request $request)
+    {
+        $posts = Post::where('user_id',auth()->id())->orderBy('created_at','desc')->paginate(5);
+        return view('users.showPosts')->with('posts',$posts);
+    }
 
     /// Update Show's Ratings
     public function getWatchCount($id)

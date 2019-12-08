@@ -51,7 +51,7 @@ class ShowsController extends Controller
     public function mostWatchedAnime()
     {
         self::updateShows();
-        $shows = Show::where('category','Anime')->orderBy('watch_count','desc')->orderBy('rating','desc')->paginate(5);
+        $shows = Show::where('category','Anime')->orderBy('watch_count','desc')->orderBy('rating','desc')->paginate(15);
         $data = array(
             'header' => 'Most Watched Animes',
             'shows' => $shows
@@ -61,7 +61,7 @@ class ShowsController extends Controller
     public function topRatedAnime()
     {
         self::updateShows();
-        $shows = Show::where('category','Anime')->orderBy('rating','desc')->orderBy('watch_count','desc')->paginate(5);
+        $shows = Show::where('category','Anime')->orderBy('rating','desc')->orderBy('watch_count','desc')->paginate(15);
         $data = array(
             'header' => 'Top Rated Animes',
             'shows' => $shows
@@ -71,9 +71,19 @@ class ShowsController extends Controller
     public function currentlyAiringAnime()
     {
         self::updateShows();
-        $shows = Show::where('category','Anime')->where('status','Airing')->orderBy('name','asc')->paginate(5);
+        $shows = Show::where('category','Anime')->where('status','Airing')->orderBy('name','asc')->paginate(15);
         $data = array(
             'header' => 'Currently Airing Animes',
+            'shows' => $shows
+        );
+        return view('shows.shows_list')->with($data);
+    }
+    public function upcomingAnime()
+    {
+        self::updateShows();
+        $shows = Show::where('category','Anime')->where('status','Not Aired')->orderBy('name','asc')->paginate(15);
+        $data = array(
+            'header' => 'Upcoming Animes',
             'shows' => $shows
         );
         return view('shows.shows_list')->with($data);
@@ -82,7 +92,7 @@ class ShowsController extends Controller
     public function mostWatchedTV()
     {
         self::updateShows();
-        $shows = Show::where('category','TV')->orderBy('watch_count','desc')->orderBy('rating','desc')->paginate(5);
+        $shows = Show::where('category','TV')->orderBy('watch_count','desc')->orderBy('rating','desc')->paginate(15);
         $data = array(
             'header' => 'Most Watched TV Shows',
             'shows' => $shows
@@ -92,7 +102,7 @@ class ShowsController extends Controller
     public function topRatedTV()
     {
         self::updateShows();
-        $shows = Show::where('category','TV')->orderBy('rating','desc')->orderBy('watch_count','desc')->paginate(5);
+        $shows = Show::where('category','TV')->orderBy('rating','desc')->orderBy('watch_count','desc')->paginate(15);
         $data = array(
             'header' => 'Top Rated TV Shows',
             'shows' => $shows
@@ -102,9 +112,19 @@ class ShowsController extends Controller
     public function currentlyAiringTV()
     {
         self::updateShows();
-        $shows = Show::where('category','TV')->where('status','Airing')->orderBy('name','asc')->paginate(5);
+        $shows = Show::where('category','TV')->where('status','Airing')->orderBy('name','asc')->paginate(15);
         $data = array(
             'header' => 'Currently Airing TV Shows',
+            'shows' => $shows
+        );
+        return view('shows.shows_list')->with($data);
+    }
+    public function upcomingTV()
+    {
+        self::updateShows();
+        $shows = Show::where('category','TV')->where('status','Not Aired')->orderBy('name','asc')->paginate(15);
+        $data = array(
+            'header' => 'Upcoming TV Series',
             'shows' => $shows
         );
         return view('shows.shows_list')->with($data);
@@ -113,7 +133,7 @@ class ShowsController extends Controller
     public function mostWatchedHollywood()
     {
         self::updateShows();
-        $shows = Show::where('category','Hollywood')->orderBy('watch_count','desc')->orderBy('rating','desc')->paginate(5);
+        $shows = Show::where('category','Hollywood')->orderBy('watch_count','desc')->orderBy('rating','desc')->paginate(15);
         $data = array(
             'header' => 'Most Watched Hollywood Movies',
             'shows' => $shows
@@ -123,9 +143,19 @@ class ShowsController extends Controller
     public function topRatedHollywood()
     {
         self::updateShows();
-        $shows = Show::where('category','Hollywood')->orderBy('rating','desc')->orderBy('watch_count','desc')->paginate(5);
+        $shows = Show::where('category','Hollywood')->orderBy('rating','desc')->orderBy('watch_count','desc')->paginate(15);
         $data = array(
             'header' => 'Top Rated Hollywood Movies',
+            'shows' => $shows
+        );
+        return view('shows.shows_list')->with($data);
+    }
+    public function upcomingHollywood()
+    {
+        self::updateShows();
+        $shows = Show::where('category','Hollywood')->where('status','Not Aired')->orderBy('name','asc')->paginate(15);
+        $data = array(
+            'header' => 'Upcoming Hollywood Movies',
             'shows' => $shows
         );
         return view('shows.shows_list')->with($data);
@@ -134,7 +164,7 @@ class ShowsController extends Controller
     public function mostWatchedBollywood()
     {
         self::updateShows();
-        $shows = Show::where('category','Bollywood')->orderBy('watch_count','desc')->orderBy('rating','desc')->paginate(5);
+        $shows = Show::where('category','Bollywood')->orderBy('watch_count','desc')->orderBy('rating','desc')->paginate(15);
         $data = array(
             'header' => 'Most Watched Bollywood Movies',
             'shows' => $shows
@@ -144,9 +174,19 @@ class ShowsController extends Controller
     public function topRatedBollywood()
     {
         self::updateShows();
-        $shows = Show::where('category','Bollywood')->orderBy('rating','desc')->orderBy('watch_count','desc')->paginate(5);
+        $shows = Show::where('category','Bollywood')->orderBy('rating','desc')->orderBy('watch_count','desc')->paginate(15);
         $data = array(
             'header' => 'Top Rated Bollywood Movies',
+            'shows' => $shows
+        );
+        return view('shows.shows_list')->with($data);
+    }
+    public function upcomingBollywood()
+    {
+        self::updateShows();
+        $shows = Show::where('category','Bollywood')->where('status','Not Aired')->orderBy('name','asc')->paginate(15);
+        $data = array(
+            'header' => 'Upcoming Bollywood Movies',
             'shows' => $shows
         );
         return view('shows.shows_list')->with($data);
@@ -163,6 +203,7 @@ class ShowsController extends Controller
         );
         return view('shows.shows_list')->with($data);
     }
+    
 
     /**
      * Show the form for creating a new resource.

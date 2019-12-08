@@ -15,7 +15,6 @@
     <div>
         {!! $post->body !!}
     </div>
-
     <hr>
 
     @if(!Auth::guest() && Auth::user()->id == $post->user_id)
@@ -26,7 +25,10 @@
             @csrf
             <input type="submit" class="btn btn-outline-danger" value="Delete"/>
         </form>
+        <hr>
     @endif
-    <br><br>
-
+    <div id="comments">
+        <h3> <strong> Comments </strong> </h3> <br>
+        @comments(['model' => $post])
+    </div>
 @endsection

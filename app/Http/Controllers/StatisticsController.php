@@ -79,6 +79,8 @@ class StatisticsController extends Controller
             return redirect('/login');
         
         $show = Show::find($id);
+        if($show->status == "Not Aired")
+            return redirect()->back();
         $rating = $request->input('rateIt');
         $status = $request->input('status');
         $episodes = $request->input('episodesWatched');

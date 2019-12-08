@@ -1,5 +1,6 @@
 <?php
 
+use App\Post;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,16 +37,20 @@ Route::get('/admin-panel/shows/delete/{id}','ShowsController@destroy');
 Route::get('most-watched-anime','ShowsController@mostWatchedAnime');
 Route::get('top-rated-anime','ShowsController@topRatedAnime');
 Route::get('currently-airing-anime','ShowsController@currentlyAiringAnime');
+Route::get('upcoming-anime','ShowsController@upcomingAnime');
 
 Route::get('most-watched-tv','ShowsController@mostWatchedTV');
 Route::get('top-rated-tv','ShowsController@topRatedTV');
 Route::get('currently-airing-tv','ShowsController@currentlyAiringTV');
+Route::get('upcoming-tv','ShowsController@upcomingTV');
 
 Route::get('most-watched-hollywood','ShowsController@mostWatchedHollywood');
 Route::get('top-rated-hollywood','ShowsController@topRatedHollywood');
+Route::get('upcoming-hollywood','ShowsController@upcomingHollywood');
 
 Route::get('most-watched-bollywood','ShowsController@mostWatchedBollywood');
 Route::get('top-rated-bollywood','ShowsController@topRatedBollywood');
+Route::get('upcoming-bollywood','ShowsController@upcomingBollywood');
 
 Route::get('anime-search','ShowsController@searchAnime');
 
@@ -59,6 +64,7 @@ Route::get('/users/{id}/dropped','UsersController@dropped');
 Route::get('/users/{id}/plan-to-watch','UsersController@planToWatch');
 Route::get('/update-details','UsersController@update_details');
 Route::get('/profile','UsersController@profile');
+Route::get('/profile/user-posts','UserController@myPosts');
 Route::get('/profile/watching','UsersController@myWatching');
 Route::get('/profile/completed','UsersController@myCompleted');
 Route::get('/profile/on-hold','UsersController@myOnHold');

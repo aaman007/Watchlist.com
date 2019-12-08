@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('js')
+    <script src="jquery-3.4.1.min.js"></script>
+@endpush
+
 @section('content')
     <div class="row">
         <div class="col-md-8 mb-2">
@@ -12,6 +16,17 @@
                         </div>
                         <div class="col-md-5 justify-content-center align-self-center">
                             <p><i class="fa fa-user"> {{$user->name}}</i></p> 
+                            <p><i class="fa fa-star">
+                                @if($user->rank == 1)
+                                    <span class='text-primary text-bold'>{{$user->title}}</span>
+                                @elseif($user->rank == 2)
+                                    <span class='text-success text-bold'>{{$user->title}}</span>
+                                @elseif($user->rank == 3)
+                                    <span class='text-info text-bold'>{{$user->title}}</span>
+                                @else
+                                    <span class='text-secondary text-bold'>{{$user->title}}</span>
+                                @endif
+                            </i></p>
                             @if($user->city != "" && $user->country != "")
                                 <p><i class="fa fa-map-marker"> {{$user->city}},{{$user->country}}</i></p>
                             @elseif($user->city != "" || $user->country != "")
@@ -28,10 +43,11 @@
                                 <p><i class="fa fa-male"> N/A </i></p>
                             @endif
                             @if($user->website != "")
-                                <p><i class="fa fa-globe"> {{$user->website}} </i></p>
+                                <p><i class="fa fa-globe"> <a href="{{$user->website}}"> {{$user->website}}</a> </i></p>
                             @else
                                 <p><i class="fa fa-globe"> N/A </i></p>
                             @endif
+                            <p><i class="fa fa-registered"> {{$user->created_at->diffForHumans()}} </i></p>
                         </div>
                     </div>
                 </div>
@@ -75,21 +91,9 @@
                 <div class="card-header"> Blog Posts </div>
                 <div class="card-body">
                     @if(count($posts))
-                    @foreach($posts as $post)
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="p-2">
-                                        <a style="text-decoration:none;" href="posts/{{$post->id}}"> <h5>{{$post->title}}</h5> </a>
-                                        <small>Written {{$post
-                                        ->created_at->diffForHumans()}}</small>
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="userPosts">
+                            @include('users.userPosts')
                         </div>
-                    @endforeach
-                    <br>
-                    {{$posts->links()}} <!-- Pagination -->
                     @else
                         No Posts to show
                     @endif
@@ -110,5 +114,20 @@
         </div>
         -->
     </div>
-    
+    <script>
+        $(document).on('click','.pagination a',function(e){
+            e.preventDefault();
+
+            let url = $(this).attr('href').split('page=')[1];
+            console.log(url);
+            $.ajax({
+                url:'/profile/user-posts?page='+url,
+                success:function(data)
+                {
+                    $('#userPosts').html(data);
+                    location.hash=url;
+                }
+            });
+        });
+    </script>
 @endsection

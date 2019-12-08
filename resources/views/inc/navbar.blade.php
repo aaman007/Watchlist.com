@@ -28,11 +28,15 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/top-rated-anime">
                             Top Rated
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/currently-airing-anime">
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/currently-airing-anime">
                             Currently Airing
-                            </a>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/upcoming-anime">
+                            Upcoming
+                        </a>
                     </div>
                 </li>
 
@@ -48,11 +52,15 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/top-rated-tv">
                             Top Rated
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/currently-airing-tv">
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/currently-airing-tv">
                             Currently Airing
-                            </a>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/upcoming-tv">
+                            Upcoming
+                        </a>
                     </div>
                 </li>
 
@@ -69,6 +77,10 @@
                         <a class="dropdown-item" href="/top-rated-hollywood">
                             Top Rated
                         </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/upcoming-hollywood">
+                            Upcoming
+                        </a>
                     </div>
                 </li>
                 <li class="nav-item dropdown p-2">
@@ -83,6 +95,10 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/top-rated-bollywood">
                             Top Rated
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/upcoming-bollywood">
+                            Upcoming
                         </a>
                     </div>
                  </li>
