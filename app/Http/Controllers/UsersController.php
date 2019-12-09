@@ -47,7 +47,7 @@ class UsersController extends Controller
         $user = User::find(auth()->user()->id);
         return view('users.update_details')->with('user',$user);
     }
-    public function profile()
+    public function profile(Request $request)
     {
         $user = auth()->user();
         $posts = Post::where('user_id',$user->id)->orderBy('created_at','desc')->paginate(5);
@@ -70,7 +70,10 @@ class UsersController extends Controller
     public function myPosts(Request $request)
     {
         $posts = Post::where('user_id',auth()->id())->orderBy('created_at','desc')->paginate(5);
-        return view('users.showPosts')->with('posts',$posts);
+        if ($request->ajax()) {
+            return view('users.userPosts')->with('posts',$posts);
+        }
+        return view('users.profile')->with('posts',$posts);
     }
 
     /// Update Show's Ratings

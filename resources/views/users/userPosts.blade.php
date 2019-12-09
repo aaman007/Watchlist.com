@@ -11,4 +11,4 @@
     </div>
 @endforeach
 <br>
-{{$posts->links()}} <!-- Pagination -->
+{{$posts->render()}} <!-- Pagination -->

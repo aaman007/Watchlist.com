@@ -85,13 +85,13 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="blog_posts">
         <div class="col-md-8 mb-2">
             <div class="card">
                 <div class="card-header"> Blog Posts </div>
                 <div class="card-body">
                     @if(count($posts))
-                        <div id="userPosts">
+                        <div id="user_posts">
                             @include('users.userPosts')
                         </div>
                     @else
@@ -114,20 +114,47 @@
         </div>
         -->
     </div>
-    <script>
-        $(document).on('click','.pagination a',function(e){
-            e.preventDefault();
-
-            let url = $(this).attr('href').split('page=')[1];
-            console.log(url);
-            $.ajax({
-                url:'/profile/user-posts?page='+url,
-                success:function(data)
-                {
-                    $('#userPosts').html(data);
-                    location.hash=url;
+    <!-- <script type="text/javascript">
+        $(window).on('hashchange', function() {
+            if (window.location.hash) {
+                var page = window.location.hash.replace('#', '');
+                if (page == Number.NaN || page <= 0) {
+                    return false;
+                }else{
+                    getData(page);
                 }
-            });
+            }
         });
-    </script>
+        
+        $(document).ready(function()
+        {
+            $(document).on('click', '.pagination a',function(event)
+            {
+                event.preventDefault();
+      
+                $('li').removeClass('active');
+                $(this).parent('li').addClass('active');
+      
+                var myurl = $(this).attr('href');
+                var page=$(this).attr('href').split('page=')[1];
+      
+                getData(page);
+            });
+      
+        });
+      
+        function getData(page){
+            $.ajax(
+            {
+                url: '?page=' + page,
+                type: "get",
+                datatype: "html"
+            }).done(function(data){
+                $("#user_posts").empty().html(data);
+                location.hash = page;
+            }).fail(function(jqXHR, ajaxOptions, thrownError){
+                  alert('No response from server');
+            });
+        }
+    </script> -->
 @endsection
