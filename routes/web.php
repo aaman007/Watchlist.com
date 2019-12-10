@@ -64,7 +64,7 @@ Route::get('/users/{id}/dropped','UsersController@dropped');
 Route::get('/users/{id}/plan-to-watch','UsersController@planToWatch');
 Route::get('/update-details','UsersController@update_details');
 Route::get('/profile','UsersController@profile');
-Route::get('/profile/user-posts','UserController@myPosts');
+//Route::get('/profile','UsersController@myPosts');
 Route::get('/profile/watching','UsersController@myWatching');
 Route::get('/profile/completed','UsersController@myCompleted');
 Route::get('/profile/on-hold','UsersController@myOnHold');

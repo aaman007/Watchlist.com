@@ -87,7 +87,9 @@
                 <div class="card-header"> Blog Posts </div>
                 <div class="card-body">
                     @if(count($posts))
-                        @include('users.userPosts')
+                        <div id="user_posts">
+                            @include('users.userPosts')
+                        </div>
                     @else
                         No Posts to show
                     @endif
@@ -96,4 +98,31 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(window).on('hashchange', function() {
+            if (window.location.hash) {
+                let page = window.location.hash.replace('#', '');
+                if (page == Number.NaN || page <= 0) {
+                    return false;
+                }else{
+                    updateData(page);
+                }
+            }
+        });
+        $(document).on('click','.pagination a',function(e){
+            e.preventDefault();
+            let page = $(this).attr('href').split('page=')[1];
+            updateData(page);
+        });
+        function updateData(page)
+        {
+            $.ajax({
+                url : '/users/'+{{$user->id}}+'?page='+page
+            }).done(function(data){
+                $('#user_posts').html(data);
+                location.hash = page;
+            });
+        }
+    </script>
 @endsection

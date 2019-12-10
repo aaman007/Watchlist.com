@@ -65,15 +65,10 @@ class UsersController extends Controller
             'dropped' => $dropped,
             'planToWatch' => $planToWatch
         );
-        return view('users.profile')->with($data);
-    }
-    public function myPosts(Request $request)
-    {
-        $posts = Post::where('user_id',auth()->id())->orderBy('created_at','desc')->paginate(5);
         if ($request->ajax()) {
             return view('users.userPosts')->with('posts',$posts);
         }
-        return view('users.profile')->with('posts',$posts);
+        return view('users.profile')->with($data);
     }
 
     /// Update Show's Ratings
@@ -306,7 +301,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,Request $request)
     {
         $user = User::find($id);
         $posts = Post::where('user_id',$user->id)->orderBy('created_at','desc')->paginate(5);
@@ -325,9 +320,12 @@ class UsersController extends Controller
             'planToWatch' => $planToWatch
         );
         if(auth()->guest() || auth()->id() != $user->id)
+        {
+            if ($request->ajax())
+                return view('users.userPosts')->with('posts',$posts);
             return view('users.user_profile')->with($data);
-        else
-            return redirect('/profile');
+        }
+        return redirect('/profile');
     }
 
     /**
