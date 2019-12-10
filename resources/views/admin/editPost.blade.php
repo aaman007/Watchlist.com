@@ -21,7 +21,7 @@
             @method('PUT')
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" name="title" value="{{$post->title}}"/>
+                <input required type="text" class="form-control" name="title" value="{{$post->title}}"/>
             </div>
             <div class="form-group">
                 <label for="body">Body</label>

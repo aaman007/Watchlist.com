@@ -151,4 +151,7 @@
         <div class="card-footer">
         </div>
     </div>
+    <script>
+        
+    </script>
 @endsection

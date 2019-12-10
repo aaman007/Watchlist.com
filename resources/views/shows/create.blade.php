@@ -22,7 +22,7 @@
                     <th>Show Name</th>
                     <th>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="name" placeholder="e.g, Avengers"/>
+                        <input required type="text" class="form-control" name="name" placeholder="e.g, Avengers"/>
                     </div>
                     </th>
                 </tr>
@@ -30,7 +30,7 @@
                     <th>Cover Image</th>
                     <th>
                         <div class="form-group">
-                            <input id="cover_image" class="form-control" type="file" name="cover_image">
+                            <input required id="cover_image" class="form-control" type="file" name="cover_image">
                         </div>
                     </th>
                 </tr>
@@ -38,7 +38,7 @@
                     <th>Plot</th>
                     <th>
                     <div class="form-group">
-                        <textarea cols="50" rows="5" class="form-control" name="plot" placeholder="e.g, How will the avengers defend earth after a shocking...."></textarea>
+                        <textarea required cols="50" rows="5" class="form-control" name="plot" placeholder="e.g, How will the avengers defend earth after a shocking...."></textarea>
                     </div>
                     </th>
                 </tr>
@@ -46,7 +46,7 @@
                     <th>Episodes</th>
                     <th>
                     <div class="form-group">
-                        <input type="number" class="form-control" name="episodes" placeholder="e.g, 12"/>
+                        <input required type="number" class="form-control" name="episodes" placeholder="e.g, 12"/>
                     </div>
                     </th>
                 </tr>
@@ -54,7 +54,7 @@
                     <th>Premiere Date</th>
                     <th>
                     <div class="form-group">
-                        <input  class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" name="premiere_date" placeholder="e.g, 2020-12-19"/>
+                        <input required class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" name="premiere_date" placeholder="e.g, 2020-12-19"/>
                     </div>
                     </th>
                 </tr>

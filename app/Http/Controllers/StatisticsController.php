@@ -108,7 +108,7 @@ class StatisticsController extends Controller
             $statistic = new Statistic;
             $statistic->user_id = auth()->id();
             $statistic->show_id = $id;
-
+            
             if($status == "Completed")
                 $episodes = $show->episodes;
             if($episodes == $show->episodes)
@@ -119,7 +119,7 @@ class StatisticsController extends Controller
         $statistic->episodes = $episodes;
         $statistic->rating = $rating;
         $statistic->save();
-
+        
         return back();
     }
 

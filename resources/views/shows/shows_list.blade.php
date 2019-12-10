@@ -18,7 +18,7 @@
                         <td class="text-center"> {{$index + $shows->firstItem() }}</td>
                         <td>
                             <div class="row">
-                                <img src="/storage/cover_images/{{$show->cover_image}}" height="80" width="60">
+                                <img src="/storage/cover_images/{{$show->cover_image}}" height="95" width="70">
                                 <div class="col">
                                     <a href="/shows/{{$show->id}}"> <h5>{{$show->name}}</h5> </a>
                                     <small>Category : {{$show->category}}</small> <br>

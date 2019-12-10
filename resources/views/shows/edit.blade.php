@@ -23,7 +23,7 @@
                     <th>Show Name</th>
                     <th>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="name" value="{{$show->name}}"/>
+                        <input required type="text" class="form-control" name="name" value="{{$show->name}}"/>
                     </div>
                     </th>
                 </tr>
@@ -39,7 +39,7 @@
                     <th>Plot</th>
                     <th>
                     <div class="form-group">
-                        <textarea cols="50" rows="5" class="form-control" name="plot">{{$show->plot}}</textarea>
+                        <textarea required cols="50" rows="5" class="form-control" name="plot">{{$show->plot}}</textarea>
                     </div>
                     </th>
                 </tr>
@@ -47,7 +47,7 @@
                     <th>Episodes</th>
                     <th>
                     <div class="form-group">
-                        <input type="number" class="form-control" name="episodes" value="{{$show->episodes}}"/>
+                        <input required type="number" class="form-control" name="episodes" value="{{$show->episodes}}"/>
                     </div>
                     </th>
                 </tr>
@@ -55,7 +55,7 @@
                     <th>Premiere Date</th>
                     <th>
                     <div class="form-group">
-                        <input  class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" name="premiere_date" value="{{$show->premiere_date}}"/>
+                        <input required class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" name="premiere_date" value="{{$show->premiere_date}}"/>
                     </div>
                     </th>
                 </tr>

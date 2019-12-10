@@ -24,9 +24,9 @@
                             <th>Details</th>
                             <th>Time</th>
                         </tr>
-                    @foreach($logs as $log)
+                    @foreach($logs as $id=>$log)
                         <tr>
-                        <td>{{$log->id}}</td>
+                        <td>{{$id + $logs->firstItem() }}</td>
                         <td>{{$log->details}}</td>
                         <td>{{$log->created_at->diffForHumans()}}</td>
                         </tr>

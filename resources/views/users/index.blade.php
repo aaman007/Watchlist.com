@@ -21,7 +21,7 @@
                 @elseif($user->rank == 2)
                     <span class='badge badge-success p-2'>{{$user->title}}</span>
                 @elseif($user->rank == 3)
-                    <span class='badge badge-dark p-2'>{{$user->title}}</span>
+                    <span class='badge badge-info p-2' style="color:#f2f2f2;">{{$user->title}}</span>
                 @else
                     <span class='badge badge-secondary p-2'>{{$user->title}}</span>
                 @endif

@@ -36,7 +36,7 @@
                             @endif
                             <p><i class="fa fa-envelope"> {{$user->email}}</i></p> 
                             @if($user->gender == "Male")
-                                <p><i class="fa fa-male"> {{$user->gender}}</i></p>
+                                <p><i class="fa fa-male">  {{$user->gender}}</i></p>
                             @elseif($user->gender == "Female")
                                 <p><i class="fa fa-female"> {{$user->gender}}</i></p>
                             @else
