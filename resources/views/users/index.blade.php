@@ -14,7 +14,7 @@
         @foreach($users as $user)
         <div class="card">
             <div class="card-body">
-                <h5> <a href="users/{{$user->id}}"> {{$user->name}} </a>
+                <h5> <a href="/users/{{$user->id}}"> {{$user->name}} </a>
 
                 @if($user->rank == 1)
                     <span class='badge badge-primary p-2'>{{$user->title}}</span>
